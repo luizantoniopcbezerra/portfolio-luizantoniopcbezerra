@@ -1,6 +1,5 @@
 import profileImage from "@/assets/profile.png";
 
-// Sobre
 const About = () => {
   return (
     <section id="about" className="min-h-screen flex items-center justify-center px-4 py-20">
