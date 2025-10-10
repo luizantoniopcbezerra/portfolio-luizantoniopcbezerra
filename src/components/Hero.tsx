@@ -1,89 +1,50 @@
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const [displayText, setDisplayText] = useState("");
+  const fullText = "Desenvolvedor Full Stack";
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index <= fullText.length) {
+        setDisplayText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 80);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section
-      id="hero"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5"></div>
-
-      <div className="container-max section-padding relative z-10">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <div className="mb-6">
-            <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4 border border-primary/20">
-              👋 Olá Dev, eu sou
-            </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-4">
-            <span className="text-gradient">Luiz Antônio Bezerra</span>
-          </h1>
-
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Todo sistema reflete quem o constrói
+    <section className="min-h-screen flex items-center justify-center px-4 py-20">
+      <div className="max-w-2xl w-full text-center space-y-8">
+        <div className="space-y-4">
+          <p className="font-mono text-sm text-muted-foreground">
+            {'> '}Olá! Eu sou
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 mb-8">
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 text-lg font-medium"
-              onClick={() => scrollToSection("projects")}
-            >
-              Ver Projetos
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-primary text-primary hover:bg-primary/10 px-8 py-3 text-lg font-medium"
-              onClick={() => scrollToSection("contact")}
-            >
-              Entre em Contato
-            </Button>
+          <h1 className="font-pixel text-4xl md:text-6xl text-foreground">
+            Luiz Bezerra
+          </h1>
+          <div className="h-8">
+            <p className="font-mono text-lg md:text-xl text-foreground">
+              {displayText}
+              <span className="animate-blink">_</span>
+            </p>
           </div>
-
-          <div className="flex justify-center space-x-6 mb-12">
-            <a
-              href="https://github.com/bezerraluiz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
-            >
-              <Github size={24} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/bezerraluiz/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
-            >
-              <Linkedin size={24} />
-            </a>
-            <a
-              href="mailto:luizantoniopcb@gmail.com"
-              className="p-3 rounded-full bg-muted hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
-            >
-              <Mail size={24} />
-            </a>
-          </div>
-
-          <button
-            onClick={() => scrollToSection("about")}
-            className="animate-bounce text-primary hover:text-primary/80 transition-colors"
-            aria-label="Scroll para próxima seção"
-          >
-            <ArrowDown size={32} />
-          </button>
+          <p className="font-mono text-base md:text-lg text-muted-foreground max-w-lg mx-auto pt-4">
+            Transformando <span className="text-foreground font-semibold">ideias</span> em código.
+          </p>
         </div>
+
+        <a
+          href="mailto:luizantoniopcb@gmail.com?subject=Contato via Portfolio&body=Olá Luiz,"
+          className="retro-border pixel-corners bg-foreground px-8 py-4 font-pixel text-sm text-background hover:bg-secondary hover:text-secondary-foreground transition-all inline-block"
+        >
+          Me envie um email!
+        </a>
       </div>
     </section>
   );
