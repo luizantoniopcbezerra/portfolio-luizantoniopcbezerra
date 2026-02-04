@@ -2,7 +2,7 @@ import { Github, Instagram, Linkedin } from "lucide-react";
 
 const Navigation = () => {
   const socialLinks = [
-    { icon: Instagram, url: "https://www.instagram.com/_bezerraluiz/", label: "Instagram" },
+    { icon: Instagram, url: "https://www.instagram.com/bezerraluiz.dev/", label: "Instagram" },
     { icon: Github, url: "https://github.com/bezerraluiz", label: "GitHub" },
     { icon: Linkedin, url: "https://www.linkedin.com/in/bezerraluiz/", label: "LinkedIn" },
   ];

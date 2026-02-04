@@ -1,10 +1,9 @@
-import { ExternalLink, Code } from "lucide-react";
 import adopet from "@/assets/img-projects/adopet.png";
 import curadalma from "@/assets/img-projects/curadalmaciganovladimir.jpg";
-import doskigi from "@/assets/img-projects/doskigiportfolio.jpg";
-import luadetarot from "@/assets/img-projects/luadetarot.jpg";
-import hblfront from "@/assets/img-projects/hblofertas.jpg";
 import hblback from "@/assets/img-projects/diagram.png";
+import doskigi from "@/assets/img-projects/doskigiportfolio.jpg";
+import hblfront from "@/assets/img-projects/hblofertas.jpg";
+import { Code, ExternalLink } from "lucide-react";
 
 const Projects = () => {
   const projects = [
@@ -14,7 +13,7 @@ const Projects = () => {
         "Sistema web desenvolvido no meu 4º semestre da faculdade para a ONG APA São Ludgero, com funcionalidades de cadastro de animais, adoção e doações.",
       tags: ["React.js", "Java", "PostgreSQL", "Spring"],
       codeUrl: "https://github.com/arturoburigo/Adopet",
-      liveUrl: "https://www.apasaoludgero.com.br/home",
+      liveUrl: "#",
       image: adopet,
     },
     {
@@ -34,15 +33,6 @@ const Projects = () => {
       codeUrl: "https://github.com/bezerraluiz/doski.gi-portfolio",
       liveUrl: "https://doskigitattoo.netlify.app/",
       image: doskigi,
-    },
-    {
-      title: "Lua de Tarot",
-      description:
-        "Landing Page para Lua de Tarot, com apresentação dos serviços, depoimentos e informações de contato.",
-      tags: ["HTML", "CSS", "JavaScript"],
-      codeUrl: "https://github.com/bezerraluiz/lua-de-tarot",
-      liveUrl: "https://luadetarot.com/",
-      image: luadetarot,
     },
     {
       title: "HBL Ofertas - Frontend",

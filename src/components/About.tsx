@@ -21,7 +21,7 @@ const About = () => {
 
           <div className="space-y-6 text-center">
             <p className="font-mono text-lg md:text-xl text-foreground leading-relaxed">
-              Tenho mais de 2 anos de experiência como <strong>Desenvolvedor</strong>.
+              Tenho mais de 3 anos de experiência como <strong>Desenvolvedor</strong>.
             </p>
 
             <p className="font-mono text-base md:text-lg text-muted-foreground leading-relaxed">
