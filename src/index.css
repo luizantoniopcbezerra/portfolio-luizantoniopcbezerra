@@ -2,59 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
-    --foreground: 0 0% 95%;
+    --background: 277 14% 13%;
+    --foreground: 300 17% 94%;
 
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
+    --card: 277 14% 18%;
+    --card-foreground: 300 17% 94%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 277 14% 13%;
+    --popover-foreground: 300 17% 94%;
 
-    --primary: 0 0% 95%;
-    --primary-foreground: 0 0% 7%;
+    --primary: 17 80% 54%;
+    --primary-foreground: 300 17% 94%;
 
-    --secondary: 0 0% 80%;
-    --secondary-foreground: 0 0% 7%;
+    --secondary: 277 14% 20%;
+    --secondary-foreground: 300 17% 94%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 277 14% 20%;
+    --muted-foreground: 285 12% 65%;
 
-    --accent: 0 0% 85%;
-    --accent-foreground: 0 0% 7%;
+    --accent: 305 57% 30%;
+    --accent-foreground: 307 40% 75%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 95%;
+    --destructive-foreground: 300 17% 94%;
 
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
-    --ring: 0 0% 85%;
+    --border: 277 14% 28%;
+    --input: 277 14% 28%;
+    --ring: 17 80% 54%;
 
     --radius: 0rem;
 
     --scanline-opacity: 0.03;
 
-    --sidebar-background: 0 0% 10%;
+    --sidebar-background: 277 14% 18%;
 
-    --sidebar-foreground: 0 0% 80%;
+    --sidebar-foreground: 285 12% 65%;
 
-    --sidebar-primary: 0 0% 90%;
+    --sidebar-primary: 17 80% 54%;
 
-    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-primary-foreground: 300 17% 94%;
 
-    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent: 277 14% 20%;
 
-    --sidebar-accent-foreground: 0 0% 90%;
+    --sidebar-accent-foreground: 300 17% 94%;
 
-    --sidebar-border: 0 0% 20%;
+    --sidebar-border: 277 14% 28%;
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 17 80% 54%;
   }
 
 }
@@ -69,7 +69,7 @@ All colors MUST be HSL.
     position: relative;
     scroll-behavior: smooth;
   }
-  
+
   body::before {
     content: '';
     position: fixed;
@@ -94,7 +94,7 @@ All colors MUST be HSL.
   .retro-border {
     border: 2px solid hsl(var(--border));
   }
-  
+
   .pixel-corners {
     clip-path: polygon(
       0 4px, 4px 4px, 4px 0,
@@ -102,5 +102,13 @@ All colors MUST be HSL.
       100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
       4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
     );
+  }
+
+  .text-orange {
+    color: hsl(var(--primary));
+  }
+
+  .text-aubergine {
+    color: hsl(var(--accent-foreground));
   }
 }

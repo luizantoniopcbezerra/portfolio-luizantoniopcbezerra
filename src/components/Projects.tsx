@@ -8,6 +8,24 @@ import { Code, ExternalLink } from "lucide-react";
 const Projects = () => {
   const projects = [
     {
+      title: "Loom — AI Project Management",
+      description:
+        "Sistema de gerenciamento de projetos com IA integrada, desenvolvido para organizar tarefas, sprints e equipes com suporte a automações inteligentes.",
+      tags: ["Vue 3", "Spring Boot", "Vite", "SQLite"],
+      codeUrl: "https://github.com/luizantoniopcbezerra/loom-ai",
+      liveUrl: "#",
+      image: hblback,
+    },
+    {
+      title: "MCP Master of Puppets",
+      description:
+        "Servidor MCP para comunicação assíncrona entre agentes de IA, com caixas de entrada baseadas em arquivos versionadas via YAML.",
+      tags: ["Python", "MCP", "YAML"],
+      codeUrl: "https://github.com/luizantoniopcbezerra/mcp-master-of-puppets",
+      liveUrl: "#",
+      image: hblback,
+    },
+    {
       title: "APA São Ludgero",
       description:
         "Sistema web desenvolvido no meu 4º semestre da faculdade para a ONG APA São Ludgero, com funcionalidades de cadastro de animais, adoção e doações.",
@@ -19,7 +37,7 @@ const Projects = () => {
     {
       title: "A Cura D'Alma e Cigano Vladimir",
       description:
-        "Landing Page com intuito de apresentar a tarologa que atua de consultas presenciais e à distância. Cada card, cada um sendo uma consulta, com título, descrição e valor, apresenta seus serviços e suas redes sociais linkadas.",
+        "Landing Page com intuito de apresentar a tarologa que atua de consultas presenciais e à distância. Cada card apresenta seus serviços e redes sociais.",
       tags: ["HTML", "CSS", "JavaScript"],
       codeUrl: "https://github.com/bezerraluiz/curadalma-ciganovladimir",
       liveUrl: "https://curadalmaciganovladimir.com/",
@@ -28,14 +46,14 @@ const Projects = () => {
     {
       title: "Doski Gi Tattoo Portfolio",
       description:
-        "Landing Page de portfólio para a tatuadora Doski Gi, com apresentação dos trabalhos realizados, informações de contato e redes sociais.",
+        "Portfólio para a tatuadora Doski Gi, com trabalhos realizados, informações de contato e redes sociais.",
       tags: ["HTML", "CSS", "JavaScript"],
       codeUrl: "https://github.com/bezerraluiz/doski.gi-portfolio",
       liveUrl: "https://doskigitattoo.netlify.app/",
       image: doskigi,
     },
     {
-      title: "HBL Ofertas - Frontend",
+      title: "HBL Ofertas — Frontend",
       description:
         "Sistema web de ofertas, com funcionalidades de cadastro de produtos e gerenciamento de ofertas.",
       tags: ["React.js", "JavaScript", "Next.js", "CSS"],
@@ -44,9 +62,9 @@ const Projects = () => {
       image: hblfront,
     },
     {
-      title: "HBL Ofertas - Backend",
+      title: "HBL Ofertas — Backend",
       description:
-        "Backend para o CRUD completo do sistema com conexão com Google Drive para salvamento das imagens.",
+        "CRUD completo do sistema, com integração ao Google Drive para salvar imagens.",
       tags: ["Node.js", "PostgreSQL", "Fastify", "TypeScript"],
       codeUrl: "https://github.com/bezerraluiz/hbl-ofertas-backend",
       liveUrl: "#",
@@ -60,15 +78,21 @@ const Projects = () => {
       className="min-h-screen flex items-center justify-center px-4 py-20"
     >
       <div className="max-w-6xl w-full">
-        <h2 className="font-pixel text-3xl md:text-4xl text-foreground mb-16 text-center">
-          {"> "}Meus projetos
-        </h2>
+        <div className="mb-16 text-center space-y-2">
+          <p className="font-mono text-sm text-primary">ls ~/</p>
+          <h2 className="font-pixel text-3xl md:text-4xl text-foreground">
+            meus_projetos
+          </h2>
+          <p className="font-mono text-xs text-muted-foreground">
+            {projects.length} repositórios encontrados
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="retro-border pixel-corners bg-background overflow-hidden hover:shadow-lg transition-all group"
+              className="retro-border pixel-corners bg-card overflow-hidden hover:border-primary transition-all group"
             >
               {/* Project Image */}
               <div className="h-48 bg-muted overflow-hidden">
@@ -81,12 +105,12 @@ const Projects = () => {
 
               {/* Project Content */}
               <div className="p-6 space-y-4">
-                <h3 className="font-pixel text-lg text-foreground">
-                  {"> "}
+                <h3 className="font-pixel text-sm text-foreground leading-snug">
+                  <span className="text-primary">{"> "}</span>
                   {project.title}
                 </h3>
 
-                <p className="font-mono text-sm text-muted-foreground leading-relaxed min-h-[100px]">
+                <p className="font-mono text-sm text-muted-foreground leading-relaxed min-h-[80px]">
                   {project.description}
                 </p>
 
@@ -95,7 +119,7 @@ const Projects = () => {
                   {project.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="font-mono text-xs px-2 py-1 bg-muted text-foreground rounded"
+                      className="font-mono text-xs px-2 py-1 bg-secondary text-accent-foreground rounded"
                     >
                       {tag}
                     </span>
@@ -108,7 +132,7 @@ const Projects = () => {
                     href={project.codeUrl}
                     className={`${
                       project.liveUrl === "#" ? "w-full" : "flex-1"
-                    } flex items-center justify-center gap-2 font-mono text-sm py-2 px-4 retro-border hover:bg-foreground hover:text-background transition-all`}
+                    } flex items-center justify-center gap-2 font-mono text-sm py-2 px-4 retro-border hover:bg-secondary hover:text-foreground hover:border-primary transition-all`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -118,12 +142,12 @@ const Projects = () => {
                   {project.liveUrl !== "#" && (
                     <a
                       href={project.liveUrl}
-                      className="flex-1 flex items-center justify-center gap-2 font-mono text-sm py-2 px-4 retro-border bg-foreground text-background hover:bg-background hover:text-foreground transition-all"
+                      className="flex-1 flex items-center justify-center gap-2 font-mono text-sm py-2 px-4 retro-border bg-primary text-primary-foreground hover:bg-background hover:text-primary transition-all"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <ExternalLink size={16} />
-                      Ver Projeto
+                      Ver projeto
                     </a>
                   )}
                 </div>
@@ -134,14 +158,15 @@ const Projects = () => {
 
         <div className="text-center pt-8">
           <p className="font-mono text-sm text-muted-foreground">
-            {"> "}Disponível para novos projetos
-            <span className="animate-blink">_</span>
+            <span className="text-primary">{">"} </span>
+            Disponível para novos projetos
+            <span className="animate-blink text-primary">_</span>
           </p>
         </div>
 
         <footer className="mt-12 text-center border-t border-border pt-8">
           <p className="font-mono text-xs text-muted-foreground">
-            © 2025 Luiz Bezerra • Desenvolvido com React + Vite & Tailwind CSS
+            © 2026 luiz antônio pc bezerra • luizantoniopcb@gmail.com
           </p>
         </footer>
       </div>
