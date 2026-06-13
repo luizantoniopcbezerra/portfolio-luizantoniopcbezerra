@@ -3,6 +3,7 @@ import curadalma from "@/assets/img-projects/curadalmaciganovladimir.jpg";
 import hblback from "@/assets/img-projects/diagram.png";
 import doskigi from "@/assets/img-projects/doskigiportfolio.jpg";
 import hblfront from "@/assets/img-projects/hblofertas.jpg";
+import loom from "@/assets/img-projects/loom.png";
 import { translations, type Lang } from "@/lib/i18n";
 
 interface Props {
@@ -28,7 +29,7 @@ const projects: Project[] = [
     tags: ["Vue 3", "Spring Boot", "Vite", "SQLite"],
     codeUrl: "https://github.com/luizantoniopcbezerra/loom-ai",
     liveUrl: "https://luizantoniopcbezerra.github.io/loom-lp/",
-    image: hblback,
+    image: loom,
   },
   {
     title: "MCP Master of Puppets",

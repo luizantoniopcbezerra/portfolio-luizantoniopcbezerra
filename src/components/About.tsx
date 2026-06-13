@@ -1,4 +1,4 @@
-import profileImage from "@/assets/profile.png";
+import profileImage from "@/assets/profile.jpg";
 import { translations, type Lang } from "@/lib/i18n";
 
 interface Props {
