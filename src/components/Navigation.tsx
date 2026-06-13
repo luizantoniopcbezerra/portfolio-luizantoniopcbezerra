@@ -1,63 +1,139 @@
-import { Github, Instagram, Linkedin } from "lucide-react";
+import { useEffect, useState } from "react";
+import { translations, type Lang } from "@/lib/i18n";
 
-const Navigation = () => {
-  const socialLinks = [
-    { icon: Instagram, url: "https://www.instagram.com/bezerraluiz.dev/", label: "Instagram" },
-    { icon: Github, url: "https://github.com/bezerraluiz", label: "GitHub" },
-    { icon: Linkedin, url: "https://www.linkedin.com/in/bezerraluiz/", label: "LinkedIn" },
-  ];
+interface Props {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+}
 
-  const navLinks = [
-    { name: "Sobre", href: "#about" },
-    { name: "Projetos", href: "#projects" },
-  ];
+const socials = [
+  { label: "GitHub", url: "https://github.com/bezerraluiz" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/bezerraluiz/" },
+  { label: "Instagram", url: "https://www.instagram.com/bezerraluiz.dev/" },
+];
+
+function formatDateTime(lang: Lang): string {
+  const now = new Date();
+  const weekday = now.toLocaleDateString(lang === "pt" ? "pt-BR" : "en-US", { weekday: "short" })
+    .replace(".", "").toLowerCase();
+  const day = now.getDate();
+  const month = now.toLocaleDateString(lang === "pt" ? "pt-BR" : "en-US", { month: "short" })
+    .replace(".", "").toLowerCase();
+  const time = now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", hour12: false });
+  return `${weekday} ${day} ${month} · ${time}`;
+}
+
+const Navigation = ({ lang, setLang }: Props) => {
+  const t = translations[lang];
+  const [datetime, setDatetime] = useState(() => formatDateTime(lang));
+
+  useEffect(() => {
+    setDatetime(formatDateTime(lang));
+    const id = setInterval(() => setDatetime(formatDateTime(lang)), 30_000);
+    return () => clearInterval(id);
+  }, [lang]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 py-3">
-        <div className="grid grid-cols-3 items-center">
-          {/* Logo */}
-          <div className="flex justify-start">
-            <a href="/" className="font-mono text-sm text-foreground hover:text-primary transition-colors leading-tight">
-              <span className="text-muted-foreground">luizantoniopc</span>
-              <span className="text-primary font-semibold">bezerra</span>
-            </a>
-          </div>
+    <>
+      {/* System bar */}
+      <div
+        className="fixed top-0 left-0 right-0 z-50 font-mono flex items-center justify-between"
+        style={{
+          background: "#16131a",
+          height: 34,
+          padding: "0 20px",
+          fontSize: 12,
+          color: "hsl(var(--muted-foreground))",
+          borderBottom: "1px solid rgba(255,255,255,0.10)",
+        }}
+      >
+        <span style={{ color: "hsl(var(--foreground))", fontWeight: 600 }}>● luizantoniopcbezerra</span>
+        <span>{t.status}</span>
+        <span>{datetime}</span>
+      </div>
 
-          {/* Nav links */}
-          <div className="hidden md:flex gap-6 justify-center">
-            {navLinks.map((link, index) => (
-              <a
-                key={index}
-                href={link.href}
-                className="font-mono text-sm text-foreground hover:text-primary transition-colors"
+      {/* Nav */}
+      <nav
+        className="fixed left-0 right-0 z-40 flex items-center justify-between font-mono"
+        style={{
+          top: 34,
+          background: "hsl(var(--card))",
+          borderBottom: "1px solid rgba(255,255,255,0.10)",
+          padding: "0 48px",
+          height: 60,
+        }}
+      >
+        <a
+          href="/"
+          className="no-underline"
+          style={{ fontSize: 16, fontWeight: 600, color: "hsl(var(--foreground))" }}
+        >
+          <span style={{ color: "hsl(var(--primary))" }}>$</span>{" "}
+          luizantoniopc<span style={{ color: "hsl(var(--muted-foreground))" }}>bezerra</span>
+        </a>
+
+        <div className="flex items-center" style={{ gap: 24 }}>
+          <a
+            href="#about"
+            className="font-sans no-underline transition-colors"
+            style={{ fontSize: 14, color: "hsl(var(--muted-foreground))" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(var(--primary))")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(var(--muted-foreground))")}
+          >
+            {t.nav.about}
+          </a>
+          <a
+            href="#projects"
+            className="font-sans no-underline transition-colors"
+            style={{ fontSize: 14, color: "hsl(var(--muted-foreground))" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(var(--primary))")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(var(--muted-foreground))")}
+          >
+            {t.nav.projects}
+          </a>
+          {socials.map((s) => (
+            <a
+              key={s.label}
+              href={s.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline transition-colors"
+              style={{ fontSize: 12.5, color: "hsl(var(--muted-foreground))" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "hsl(var(--primary))")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "hsl(var(--muted-foreground))")}
+            >
+              {s.label}
+            </a>
+          ))}
+
+          {/* Lang toggle */}
+          <div
+            className="flex overflow-hidden"
+            style={{ border: "1px solid rgba(255,255,255,0.10)", borderRadius: 7 }}
+          >
+            {(["pt", "en"] as const).map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                style={{
+                  padding: "6px 13px",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  border: "none",
+                  fontFamily: "inherit",
+                  background: lang === l ? "hsl(var(--primary))" : "transparent",
+                  color: lang === l ? "#1b181f" : "hsl(var(--muted-foreground))",
+                  transition: "all 0.15s ease",
+                }}
               >
-                {link.name}
-              </a>
+                {l.toUpperCase()}
+              </button>
             ))}
           </div>
-
-          {/* Social links */}
-          <div className="flex gap-4 justify-end">
-            {socialLinks.map((link, index) => {
-              const Icon = link.icon;
-              return (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              );
-            })}
-          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };
 

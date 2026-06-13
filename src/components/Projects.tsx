@@ -3,173 +3,344 @@ import curadalma from "@/assets/img-projects/curadalmaciganovladimir.jpg";
 import hblback from "@/assets/img-projects/diagram.png";
 import doskigi from "@/assets/img-projects/doskigiportfolio.jpg";
 import hblfront from "@/assets/img-projects/hblofertas.jpg";
-import { Code, ExternalLink } from "lucide-react";
+import { translations, type Lang } from "@/lib/i18n";
 
-const Projects = () => {
-  const projects = [
-    {
-      title: "Loom — AI Project Management",
-      description:
-        "Sistema de gerenciamento de projetos com IA integrada, desenvolvido para organizar tarefas, sprints e equipes com suporte a automações inteligentes.",
-      tags: ["Vue 3", "Spring Boot", "Vite", "SQLite"],
-      codeUrl: "https://github.com/luizantoniopcbezerra/loom-ai",
-      liveUrl: "#",
-      image: hblback,
+interface Props {
+  lang: Lang;
+}
+
+interface Project {
+  title: string;
+  desc: { pt: string; en: string };
+  tags: string[];
+  codeUrl: string;
+  liveUrl: string | null;
+  image: string | null;
+}
+
+const projects: Project[] = [
+  {
+    title: "Loom — AI Project Management",
+    desc: {
+      pt: "Control plane open-source e 100% local para orquestrar agentes de IA de código (Claude Code, Gemini CLI, Codex e mais). Vue 3 + Spring Boot.",
+      en: "Open-source, 100% local control plane to orchestrate AI coding agents (Claude Code, Gemini CLI, Codex and more). Vue 3 + Spring Boot.",
     },
-    {
-      title: "MCP Master of Puppets",
-      description:
-        "Servidor MCP para comunicação assíncrona entre agentes de IA, com caixas de entrada baseadas em arquivos versionadas via YAML.",
-      tags: ["Python", "MCP", "YAML"],
-      codeUrl: "https://github.com/luizantoniopcbezerra/mcp-master-of-puppets",
-      liveUrl: "#",
-      image: hblback,
+    tags: ["Vue 3", "Spring Boot", "Vite", "SQLite"],
+    codeUrl: "https://github.com/luizantoniopcbezerra/loom-ai",
+    liveUrl: "https://luizantoniopcbezerra.github.io/loom-lp/",
+    image: hblback,
+  },
+  {
+    title: "MCP Master of Puppets",
+    desc: {
+      pt: "Servidor MCP para comunicação assíncrona entre agentes de IA, com caixas de entrada baseadas em arquivos versionados no git.",
+      en: "MCP server for async communication between AI agents, using git-tracked file-based inboxes.",
     },
-    {
-      title: "APA São Ludgero",
-      description:
-        "Sistema web desenvolvido no meu 4º semestre da faculdade para a ONG APA São Ludgero, com funcionalidades de cadastro de animais, adoção e doações.",
-      tags: ["React.js", "Java", "PostgreSQL", "Spring"],
-      codeUrl: "https://github.com/arturoburigo/Adopet",
-      liveUrl: "#",
-      image: adopet,
+    tags: ["Python", "MCP", "YAML"],
+    codeUrl: "https://github.com/luizantoniopcbezerra/mcp-master-of-puppets",
+    liveUrl: null,
+    image: null,
+  },
+  {
+    title: "APA São Ludgero",
+    desc: {
+      pt: "Sistema web para a ONG APA São Ludgero, com cadastro de animais, adoção e doações.",
+      en: "Web system for the APA São Ludgero NGO, with animal registration, adoption and donations.",
     },
-    {
-      title: "A Cura D'Alma e Cigano Vladimir",
-      description:
-        "Landing Page com intuito de apresentar a tarologa que atua de consultas presenciais e à distância. Cada card apresenta seus serviços e redes sociais.",
-      tags: ["HTML", "CSS", "JavaScript"],
-      codeUrl: "https://github.com/bezerraluiz/curadalma-ciganovladimir",
-      liveUrl: "https://curadalmaciganovladimir.com/",
-      image: curadalma,
+    tags: ["React.js", "Java", "PostgreSQL", "Spring"],
+    codeUrl: "https://github.com/arturoburigo/Adopet",
+    liveUrl: null,
+    image: adopet,
+  },
+  {
+    title: "A Cura D'Alma e Cigano Vladimir",
+    desc: {
+      pt: "Landing page para taróloga com consultas presenciais e à distância — serviços, valores e redes sociais.",
+      en: "Landing page for a tarot reader offering in-person and remote sessions — services, pricing and socials.",
     },
-    {
-      title: "Doski Gi Tattoo Portfolio",
-      description:
-        "Portfólio para a tatuadora Doski Gi, com trabalhos realizados, informações de contato e redes sociais.",
-      tags: ["HTML", "CSS", "JavaScript"],
-      codeUrl: "https://github.com/bezerraluiz/doski.gi-portfolio",
-      liveUrl: "https://doskigitattoo.netlify.app/",
-      image: doskigi,
+    tags: ["HTML", "CSS", "JavaScript"],
+    codeUrl: "https://github.com/bezerraluiz/curadalma-ciganovladimir",
+    liveUrl: "https://curadalmaciganovladimir.com/",
+    image: curadalma,
+  },
+  {
+    title: "Doski Gi Tattoo Portfolio",
+    desc: {
+      pt: "Portfólio para a tatuadora Doski Gi, com trabalhos realizados, contato e redes sociais.",
+      en: "Portfolio for tattoo artist Doski Gi, showcasing her work, contact info and socials.",
     },
-    {
-      title: "HBL Ofertas — Frontend",
-      description:
-        "Sistema web de ofertas, com funcionalidades de cadastro de produtos e gerenciamento de ofertas.",
-      tags: ["React.js", "JavaScript", "Next.js", "CSS"],
-      codeUrl: "https://github.com/bezerraluiz/hbl-ofertas-frontend",
-      liveUrl: "https://hblofertas.com.br/",
-      image: hblfront,
+    tags: ["HTML", "CSS", "JavaScript"],
+    codeUrl: "https://github.com/bezerraluiz/doski.gi-portfolio",
+    liveUrl: "https://doskigitattoo.netlify.app/",
+    image: doskigi,
+  },
+  {
+    title: "HBL Ofertas — Frontend",
+    desc: {
+      pt: "Sistema web de ofertas, com cadastro de produtos e gerenciamento de ofertas.",
+      en: "Deals web system with product registration and offer management.",
     },
-    {
-      title: "HBL Ofertas — Backend",
-      description:
-        "CRUD completo do sistema, com integração ao Google Drive para salvar imagens.",
-      tags: ["Node.js", "PostgreSQL", "Fastify", "TypeScript"],
-      codeUrl: "https://github.com/bezerraluiz/hbl-ofertas-backend",
-      liveUrl: "#",
-      image: hblback,
+    tags: ["React.js", "Next.js", "JavaScript", "CSS"],
+    codeUrl: "https://github.com/bezerraluiz/hbl-ofertas-frontend",
+    liveUrl: "https://hblofertas.com.br/",
+    image: hblfront,
+  },
+  {
+    title: "HBL Ofertas — Backend",
+    desc: {
+      pt: "CRUD completo do sistema, com integração ao Google Drive para salvar imagens.",
+      en: "Full CRUD backend with Google Drive integration for image storage.",
     },
-  ];
+    tags: ["Node.js", "Fastify", "TypeScript", "PostgreSQL"],
+    codeUrl: "https://github.com/bezerraluiz/hbl-ofertas-backend",
+    liveUrl: null,
+    image: hblback,
+  },
+];
+
+const TrafficDots = () => (
+  <div className="flex items-center" style={{ gap: 7 }}>
+    <span style={{ width: 12, height: 12, borderRadius: "50%", background: "#e0603a", display: "inline-block" }} />
+    <span style={{ width: 12, height: 12, borderRadius: "50%", background: "#d9a441", display: "inline-block" }} />
+    <span style={{ width: 12, height: 12, borderRadius: "50%", background: "#5aa86f", display: "inline-block" }} />
+  </div>
+);
+
+const Projects = ({ lang }: Props) => {
+  const t = translations[lang];
 
   return (
-    <section
-      id="projects"
-      className="min-h-screen flex items-center justify-center px-4 py-20"
-    >
-      <div className="max-w-6xl w-full">
-        <div className="mb-16 text-center space-y-2">
-          <p className="font-mono text-sm text-primary">ls ~/</p>
-          <h2 className="font-pixel text-3xl md:text-4xl text-foreground">
-            meus_projetos
-          </h2>
-          <p className="font-mono text-xs text-muted-foreground">
-            {projects.length} repositórios encontrados
-          </p>
-        </div>
+    <section id="projects" style={{ padding: "0 48px 80px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <h2
+          className="font-mono font-semibold"
+          style={{ fontSize: 30, margin: "0 0 8px", color: "hsl(var(--foreground))" }}
+        >
+          <span style={{ color: "hsl(var(--primary))" }}>$</span> ls ~/{t.projectsTitle}
+        </h2>
+        <p
+          className="font-mono"
+          style={{ fontSize: 13, margin: "0 0 36px", color: "hsl(var(--muted-foreground))" }}
+        >
+          {projects.length} {t.reposFound}
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 26 }}>
+          {projects.map((p, i) => (
             <div
-              key={index}
-              className="retro-border pixel-corners bg-card overflow-hidden hover:border-primary transition-all group"
+              key={p.title}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                background: "hsl(var(--card))",
+                border: "1px solid rgba(255,255,255,0.10)",
+                borderRadius: 11,
+                overflow: "hidden",
+                boxShadow: "0 18px 40px -22px rgba(0,0,0,0.7)",
+                transition: "transform 0.16s ease, border-color 0.16s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.borderColor = "rgba(232,97,44,0.5)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)";
+              }}
             >
-              {/* Project Image */}
-              <div className="h-48 bg-muted overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+              {/* Card title bar */}
+              <div
+                className="flex items-center"
+                style={{
+                  padding: "10px 14px",
+                  background: "hsl(var(--secondary))",
+                  borderBottom: "1px solid rgba(255,255,255,0.10)",
+                  gap: 7,
+                }}
+              >
+                <TrafficDots />
+                <span
+                  className="font-mono"
+                  style={{
+                    marginLeft: 4,
+                    fontSize: 12,
+                    color: "hsl(var(--muted-foreground))",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  ~/projects/{String(i + 1).padStart(2, "0")}
+                </span>
               </div>
 
-              {/* Project Content */}
-              <div className="p-6 space-y-4">
-                <h3 className="font-pixel text-sm text-foreground leading-snug">
-                  <span className="text-primary">{"> "}</span>
-                  {project.title}
-                </h3>
+              {/* Image */}
+              <div style={{ height: 165, overflow: "hidden", borderBottom: "1px solid rgba(255,255,255,0.10)" }}>
+                {p.image ? (
+                  <img src={p.image} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                ) : (
+                  <div
+                    className="font-mono"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      background: "linear-gradient(135deg, rgba(119,33,111,0.4), rgba(232,97,44,0.22))",
+                      color: "hsl(var(--foreground))",
+                      fontSize: 14,
+                    }}
+                  >
+                    <span style={{ color: "hsl(var(--primary))" }}>$</span>&nbsp;cat&nbsp;
+                    {p.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}
+                  </div>
+                )}
+              </div>
 
-                <p className="font-mono text-sm text-muted-foreground leading-relaxed min-h-[80px]">
-                  {project.description}
+              {/* Content */}
+              <div style={{ padding: "18px 18px 16px", display: "flex", flexDirection: "column", gap: 11, flex: 1 }}>
+                <h3
+                  className="font-sans font-semibold"
+                  style={{ fontSize: 17, margin: 0, lineHeight: 1.25, color: "hsl(var(--foreground))" }}
+                >
+                  {p.title}
+                </h3>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: 14, lineHeight: 1.55, margin: 0, flex: 1, color: "hsl(var(--muted-foreground))" }}
+                >
+                  {p.desc[lang]}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {p.tags.map((tag) => (
                     <span
-                      key={tagIndex}
-                      className="font-mono text-xs px-2 py-1 bg-secondary text-accent-foreground rounded"
+                      key={tag}
+                      className="font-mono"
+                      style={{
+                        fontSize: 11,
+                        padding: "2px 9px",
+                        borderRadius: 20,
+                        border: "1px solid rgba(255,255,255,0.10)",
+                        color: "hsl(var(--accent-foreground))",
+                        background: "rgba(119,33,111,0.16)",
+                      }}
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-4 pt-4 border-t border-border">
+                {/* Buttons */}
+                <div style={{ display: "flex", gap: 9, paddingTop: 4 }}>
                   <a
-                    href={project.codeUrl}
-                    className={`${
-                      project.liveUrl === "#" ? "w-full" : "flex-1"
-                    } flex items-center justify-center gap-2 font-mono text-sm py-2 px-4 retro-border hover:bg-secondary hover:text-foreground hover:border-primary transition-all`}
+                    href={p.codeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="font-mono no-underline"
+                    style={{
+                      flex: 1,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 12,
+                      padding: "9px 10px",
+                      borderRadius: 7,
+                      color: "hsl(var(--foreground))",
+                      border: "1px solid rgba(255,255,255,0.10)",
+                      background: "hsl(var(--secondary))",
+                      fontWeight: 500,
+                      transition: "all 0.15s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "hsl(var(--primary))";
+                      e.currentTarget.style.color = "hsl(var(--primary))";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.10)";
+                      e.currentTarget.style.color = "hsl(var(--foreground))";
+                    }}
                   >
-                    <Code size={16} />
-                    Código
+                    {t.code}
                   </a>
-                  {project.liveUrl !== "#" && (
+                  {p.liveUrl && (
                     <a
-                      href={project.liveUrl}
-                      className="flex-1 flex items-center justify-center gap-2 font-mono text-sm py-2 px-4 retro-border bg-primary text-primary-foreground hover:bg-background hover:text-primary transition-all"
+                      href={p.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="font-mono no-underline"
+                      style={{
+                        flex: 1,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 12,
+                        padding: "9px 10px",
+                        borderRadius: 7,
+                        background: "hsl(var(--primary))",
+                        color: "#1b181f",
+                        border: "1px solid hsl(var(--primary))",
+                        fontWeight: 600,
+                        transition: "all 0.15s ease",
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = "#f1764a")}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = "hsl(var(--primary))")}
                     >
-                      <ExternalLink size={16} />
-                      Ver projeto
+                      {t.live}
                     </a>
                   )}
                 </div>
               </div>
             </div>
           ))}
-        </div>
 
-        <div className="text-center pt-8">
-          <p className="font-mono text-sm text-muted-foreground">
-            <span className="text-primary">{">"} </span>
-            Disponível para novos projetos
-            <span className="animate-blink text-primary">_</span>
-          </p>
+          {/* Available card */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "1px dashed rgba(255,255,255,0.15)",
+              borderRadius: 11,
+              minHeight: 220,
+              padding: 24,
+            }}
+          >
+            <p
+              className="font-mono"
+              style={{ fontSize: 14, textAlign: "center", margin: 0, lineHeight: 1.6, color: "hsl(var(--muted-foreground))" }}
+            >
+              <span style={{ color: "hsl(var(--primary))" }}>+</span> {t.available}
+            </p>
+          </div>
         </div>
-
-        <footer className="mt-12 text-center border-t border-border pt-8">
-          <p className="font-mono text-xs text-muted-foreground">
-            © 2026 luiz antônio pc bezerra • luizantoniopcb@gmail.com
-          </p>
-        </footer>
       </div>
+
+      {/* Footer */}
+      <footer
+        style={{
+          marginTop: 80,
+          borderTop: "1px solid rgba(255,255,255,0.10)",
+          padding: "22px 0",
+          background: "#16131a",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginLeft: -48,
+          marginRight: -48,
+          paddingLeft: 48,
+          paddingRight: 48,
+        }}
+      >
+        <p className="font-mono" style={{ fontSize: 12, margin: 0, color: "hsl(var(--muted-foreground))" }}>
+          © 2026 luiz antônio pc bezerra
+        </p>
+        <p className="font-mono" style={{ fontSize: 12, margin: 0, color: "hsl(var(--muted-foreground))" }}>
+          luizantoniopcb@gmail.com
+        </p>
+      </footer>
     </section>
   );
 };

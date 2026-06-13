@@ -1,38 +1,72 @@
 import profileImage from "@/assets/profile.png";
+import { translations, type Lang } from "@/lib/i18n";
 
-const About = () => {
+interface Props {
+  lang: Lang;
+}
+
+const About = ({ lang }: Props) => {
+  const t = translations[lang];
+
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center px-4 py-20">
-      <div className="max-w-3xl w-full">
-        <h2 className="font-pixel text-3xl md:text-4xl text-foreground mb-16 text-center">
-          {'> '}Sobre mim
-        </h2>
+    <section id="about" style={{ padding: "20px 48px 80px" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "230px 1fr",
+          gap: 48,
+          alignItems: "center",
+          maxWidth: 980,
+          margin: "0 auto",
+          background: "hsl(var(--card))",
+          border: "1px solid rgba(255,255,255,0.10)",
+          borderRadius: 13,
+          padding: 40,
+        }}
+      >
+        {/* Photo */}
+        <div
+          style={{
+            borderRadius: 11,
+            overflow: "hidden",
+            border: "1px solid rgba(255,255,255,0.10)",
+            boxShadow: "0 0 0 4px rgba(119,33,111,0.25)",
+            flexShrink: 0,
+          }}
+        >
+          <img
+            src={profileImage}
+            alt="Luiz Antônio PC Bezerra"
+            style={{ width: 230, height: 270, objectFit: "cover", display: "block" }}
+          />
+        </div>
 
-        <div className="space-y-12">
-          <div className="flex justify-center">
-            <div className="w-48 h-48 md:w-64 md:h-64 retro-border pixel-corners overflow-hidden">
-              <img
-                src={profileImage}
-                alt="Developer Profile"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-6 text-center">
-            <p className="font-mono text-lg md:text-xl text-foreground leading-relaxed">
-              Tenho mais de 3 anos de experiência como <strong>Desenvolvedor</strong>.
-            </p>
-
-            <p className="font-mono text-base md:text-lg text-muted-foreground leading-relaxed">
-              Sempre olho para o <strong>problema</strong>, pensando na <strong>ideia</strong> que irá resolvê-lo.
-            </p>
-
-            <p className="font-mono text-base md:text-lg text-muted-foreground leading-relaxed">
-              Acredito que <span className="text-foreground font-semibold">simplicidade</span> é
-              o segredo para soluções elegantes.
-            </p>
-          </div>
+        {/* Text */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <h2
+            className="font-mono font-semibold"
+            style={{ fontSize: 24, margin: 0, color: "hsl(var(--foreground))" }}
+          >
+            <span style={{ color: "hsl(var(--primary))" }}>#</span> {t.aboutTitle}
+          </h2>
+          <p
+            className="font-sans font-semibold"
+            style={{ fontSize: 21, lineHeight: 1.4, margin: 0, color: "hsl(var(--foreground))" }}
+          >
+            {t.about1}
+          </p>
+          <p
+            className="font-sans"
+            style={{ fontSize: 16, lineHeight: 1.65, margin: 0, color: "hsl(var(--muted-foreground))" }}
+          >
+            {t.about2}
+          </p>
+          <p
+            className="font-sans"
+            style={{ fontSize: 16, lineHeight: 1.65, margin: 0, color: "hsl(var(--muted-foreground))" }}
+          >
+            {t.about3}
+          </p>
         </div>
       </div>
     </section>
