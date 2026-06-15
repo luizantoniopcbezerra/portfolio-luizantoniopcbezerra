@@ -7,9 +7,9 @@ interface Props {
 }
 
 const socials = [
-  { label: "GitHub", url: "https://github.com/bezerraluiz" },
-  { label: "LinkedIn", url: "https://www.linkedin.com/in/bezerraluiz/" },
-  { label: "Instagram", url: "https://www.instagram.com/bezerraluiz.dev/" },
+  { label: "GitHub", url: "https://github.com/luizantoniopcbezerra" },
+  { label: "LinkedIn", url: "www.linkedin.com/in/luizantoniopcbezerra" },
+  { label: "Instagram", url: "https://www.instagram.com/luizantoniopcbezerra/" },
 ];
 
 function formatDateTime(lang: Lang): string {
