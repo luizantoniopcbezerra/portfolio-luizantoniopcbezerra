@@ -111,8 +111,8 @@ const Projects = ({ lang }: Props) => {
   const t = translations[lang];
 
   return (
-    <section id="projects" style={{ padding: "0 48px 80px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+    <section id="projects" style={{ padding: "0 48px 0", flex: 1, display: "flex", flexDirection: "column" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", flex: 1 }}>
         <h2
           className="font-mono font-semibold"
           style={{ fontSize: 30, margin: "0 0 8px", color: "hsl(var(--foreground))" }}
@@ -322,7 +322,7 @@ const Projects = ({ lang }: Props) => {
       {/* Footer */}
       <footer
         style={{
-          marginTop: 80,
+          marginTop: "auto",
           borderTop: "1px solid rgba(255,255,255,0.10)",
           padding: "22px 0",
           background: "#16131a",

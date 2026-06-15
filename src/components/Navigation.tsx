@@ -26,6 +26,7 @@ function formatDateTime(lang: Lang): string {
 const Navigation = ({ lang, setLang }: Props) => {
   const t = translations[lang];
   const [datetime, setDatetime] = useState(() => formatDateTime(lang));
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     setDatetime(formatDateTime(lang));
@@ -33,18 +34,30 @@ const Navigation = ({ lang, setLang }: Props) => {
     return () => clearInterval(id);
   }, [lang]);
 
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 12);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       {/* System bar */}
       <div
         className="fixed top-0 left-0 right-0 z-50 font-mono flex items-center justify-between"
         style={{
-          background: "#16131a",
+          background: isScrolled ? "rgba(22, 19, 26, 0.72)" : "#16131a",
+          backdropFilter: isScrolled ? "blur(14px) saturate(140%)" : "none",
+          WebkitBackdropFilter: isScrolled ? "blur(14px) saturate(140%)" : "none",
           height: 34,
           padding: "0 20px",
           fontSize: 12,
           color: "hsl(var(--muted-foreground))",
           borderBottom: "1px solid rgba(255,255,255,0.10)",
+          transition: "background 0.2s ease, backdrop-filter 0.2s ease, -webkit-backdrop-filter 0.2s ease",
         }}
       >
         <span style={{ color: "hsl(var(--foreground))", fontWeight: 600 }}>● luizantoniopcbezerra</span>
@@ -57,10 +70,14 @@ const Navigation = ({ lang, setLang }: Props) => {
         className="fixed left-0 right-0 z-40 flex items-center justify-between font-mono"
         style={{
           top: 34,
-          background: "hsl(var(--card))",
+          background: isScrolled ? "rgba(34, 29, 39, 0.74)" : "hsl(var(--card))",
+          backdropFilter: isScrolled ? "blur(16px) saturate(150%)" : "none",
+          WebkitBackdropFilter: isScrolled ? "blur(16px) saturate(150%)" : "none",
           borderBottom: "1px solid rgba(255,255,255,0.10)",
           padding: "0 48px",
           height: 60,
+          transition: "background 0.2s ease, backdrop-filter 0.2s ease, -webkit-backdrop-filter 0.2s ease, box-shadow 0.2s ease",
+          boxShadow: isScrolled ? "0 10px 30px -22px rgba(0,0,0,0.65)" : "none",
         }}
       >
         <a
