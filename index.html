@@ -1,18 +1,742 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Luiz Bezerra | Desenvolvedor Full Stack</title>
-    <meta name="description" content="Luiz Bezerra | Desenvolvedor Full Stack" />
-    <meta name="author" content="bezerraluiz" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luiz Antônio PC Bezerra — Engenheiro de Software</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@700;900&family=Archivo:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#f6f4ef;color:#17151c;font-family:'Archivo',sans-serif;cursor:none}
+a{color:inherit;text-decoration:none;cursor:none}a:hover{color:#000}
+::selection{background:oklch(0.62 0.17 265);color:#f6f4ef}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes gradmove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@keyframes cardIntro{0%{opacity:0;transform:translateY(-55vh) rotateX(40deg) rotateZ(-8deg) scale(.8)}60%{opacity:1}80%{transform:translateY(12px) rotateX(-4deg) rotateZ(1deg) scale(1.01)}100%{opacity:1;transform:translateY(0) rotateX(0) rotateZ(0) scale(1)}}
+@keyframes scrollAnim{0%{transform:translateY(-100%)}100%{transform:translateY(100%)}}
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+@media (pointer:coarse){body,a{cursor:auto}}
+.card{transition:box-shadow .35s ease,transform .35s ease}
+.card:hover{box-shadow:0 28px 56px -24px rgba(23,21,28,.35);transform:translateY(-8px)}
+.card-img{transition:transform .7s cubic-bezier(.2,.6,.2,1)}
+.card:hover .card-img{transform:scale(1.06)}
+.hover-link{transition:transform .25s ease}
+.hover-link:hover{transform:scale(1.06)}
+</style>
+</head>
+<body>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!-- CUSTOM CURSOR -->
+<div id="cursorDot" style="position:fixed;z-index:200;width:8px;height:8px;border-radius:50%;background:#17151c;pointer-events:none;top:0;left:0;transform:translate(-100px,-100px)"></div>
+<div id="cursorRing" style="position:fixed;z-index:200;width:38px;height:38px;border-radius:50%;border:1.5px solid #17151c;pointer-events:none;top:0;left:0;transform:translate(-100px,-100px);transition:width .25s,height .25s;opacity:.6"></div>
+
+<!-- FLOATING PROJECT PREVIEW -->
+<div id="floatPrev" style="position:fixed;z-index:60;width:300px;height:190px;border-radius:8px;overflow:hidden;pointer-events:none;top:0;left:0;opacity:0;transform:translate(-9999px,-9999px) rotate(3deg) scale(.85);transition:opacity .3s ease;box-shadow:0 30px 60px -18px rgba(23,21,28,.35)">
+  <img id="floatImg" src="/loom.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div id="scrollBar" style="position:fixed;top:0;left:0;height:4px;width:0%;z-index:150;background:linear-gradient(90deg,oklch(0.62 0.17 25),oklch(0.62 0.17 85),oklch(0.62 0.17 145),oklch(0.62 0.17 205),oklch(0.62 0.17 265),oklch(0.62 0.17 325))"></div>
+
+<!-- PRELOADER -->
+<div id="preloader" style="position:fixed;inset:0;z-index:100;background:#17151c;color:#f6f4ef;display:flex;align-items:flex-end;justify-content:space-between;padding:36px 44px;transition:clip-path .9s cubic-bezier(.76,0,.24,1);clip-path:inset(0 0 0% 0)">
+  <span style="font:500 13px 'JetBrains Mono',monospace;color:rgba(246,244,239,.6)" data-i18n="preloader.text">luiz antônio pc bezerra — engenheiro de software</span>
+  <span id="loadPct" style="font:900 110px/1 'Archivo Expanded',sans-serif;letter-spacing:-.04em;background:linear-gradient(90deg,oklch(0.72 0.17 25),oklch(0.72 0.17 85),oklch(0.72 0.17 145),oklch(0.72 0.17 205),oklch(0.72 0.17 265),oklch(0.72 0.17 325));background-size:300% 100%;animation:gradmove 3s ease infinite;-webkit-background-clip:text;background-clip:text;color:transparent">0%</span>
+</div>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:flex-end;align-items:center;padding:24px 44px;font:500 13px 'JetBrains Mono',monospace;color:rgba(23,21,28,.65);background:linear-gradient(180deg,rgba(246,244,239,.9),rgba(246,244,239,0));backdrop-filter:blur(3px)">
+  <div style="display:flex;gap:28px">
+    <a href="#sobre" data-hover data-i18n="nav.sobre">sobre</a>
+    <a href="#projetos" data-hover data-i18n="nav.projetos">projetos</a>
+    <a href="#hackathons" data-hover data-i18n="nav.hackathons">hackathons</a>
+    <a href="#contato" data-hover data-i18n="nav.contato">contato</a>
+    <span id="langToggle" data-hover style="color:#17151c;cursor:pointer">PT/EN</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="top" style="min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 44px 48px;box-sizing:border-box;position:relative;overflow:hidden">
+  <div style="height:5px;position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,oklch(0.62 0.17 25),oklch(0.62 0.17 85),oklch(0.62 0.17 145),oklch(0.62 0.17 205),oklch(0.62 0.17 265),oklch(0.62 0.17 325))"></div>
+  <div data-parallax="-0.25" style="position:absolute;top:26%;right:14%;width:10px;height:10px;border-radius:50%;background:oklch(0.62 0.17 265);animation:floaty 5s ease-in-out infinite;will-change:transform"></div>
+  <div data-parallax="0.18" style="position:absolute;top:40%;right:26%;width:7px;height:7px;border-radius:50%;background:oklch(0.62 0.17 85);animation:floaty 6.5s ease-in-out infinite 1s;will-change:transform"></div>
+  <div data-parallax="-0.14" style="position:absolute;top:18%;right:34%;width:8px;height:8px;border-radius:50%;background:oklch(0.62 0.17 145);animation:floaty 7s ease-in-out infinite .4s;will-change:transform"></div>
+  <div data-reveal style="position:absolute;top:120px;right:52px;width:130px;height:130px;opacity:0;transition:opacity 1s ease .8s">
+    <div style="width:100%;height:100%;animation:spin 14s linear infinite">
+      <svg viewBox="0 0 130 130" style="width:100%;height:100%">
+        <defs><path id="circ" d="M 65,65 m -48,0 a 48,48 0 1,1 96,0 a 48,48 0 1,1 -96,0"></path></defs>
+        <text style="font:500 11.5px 'JetBrains Mono',monospace;fill:rgba(23,21,28,.6);letter-spacing:.22em"><textPath href="#circ">DISPONÍVEL PARA PROJETOS · ENGENHEIRO DE SOFTWARE · </textPath></text>
+      </svg>
+    </div>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;color:oklch(0.62 0.17 145)">●</div>
+  </div>
+  <div style="flex:1;display:flex;align-items:center;justify-content:center;perspective:1400px">
+    <div id="bizCard" data-hover style="position:relative;width:min(620px,80vw);aspect-ratio:1.75;transform-style:preserve-3d;will-change:transform;cursor:none;animation:cardIntro 1.4s cubic-bezier(.22,1.1,.3,1) 1.75s both">
+      <div style="position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;background:#17151c;color:#f6f4ef;box-shadow:0 40px 80px -30px rgba(23,21,28,.5);padding:44px 48px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,oklch(0.72 0.17 25),oklch(0.72 0.17 85),oklch(0.72 0.17 145),oklch(0.72 0.17 205),oklch(0.72 0.17 265),oklch(0.72 0.17 325))"></div>
+        <div id="cardShine" style="position:absolute;inset:0;background:radial-gradient(circle 320px at 50% 50%,rgba(255,255,255,.14),transparent 70%);pointer-events:none;opacity:0"></div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(246,244,239,.55);letter-spacing:.14em" data-i18n="card.title">ENGENHEIRO DE SOFTWARE</span>
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:oklch(0.75 0.17 145)" data-i18n="card.status">● disponível</span>
+        </div>
+        <div>
+          <h1 style="margin:0 0 10px;font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:min(5.4vw,42px);line-height:1;letter-spacing:-.03em">Luiz Antônio<br>PC Bezerra</h1>
+          <p style="margin:0;font:400 15px/1.5 system-ui,sans-serif;color:rgba(246,244,239,.65)" data-i18n="card.tagline">Crio sites e sistemas que ajudam o seu negócio a vender mais e trabalhar melhor.</p>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;font:500 12px 'JetBrains Mono',monospace;color:rgba(246,244,239,.55)">
+          <span>luizantoniopcb@gmail.com</span>
+          <span>criciúma, sc</span>
+        </div>
+      </div>
+      <div style="position:absolute;inset:0;backface-visibility:hidden;transform:rotateY(180deg);border-radius:18px;background:#fff;color:#17151c;border:1px solid rgba(23,21,28,.12);box-shadow:0 40px 80px -30px rgba(23,21,28,.4);padding:44px 48px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
+        <span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(23,21,28,.5);letter-spacing:.14em" data-i18n="card.back.title">COMO POSSO AJUDAR</span>
+        <div style="display:flex;flex-direction:column;gap:14px;font:400 15px/1.5 system-ui,sans-serif">
+          <span data-i18n="card.back.item1"><strong>Entendendo problemas</strong>, desenvolvendo soluções.</span>
+          <span data-i18n="card.back.item2"><strong>Sistemas sob medida</strong> que organizam sua operação</span>
+          <span data-i18n="card.back.item3"><strong>Automações</strong> que economizam horas de trabalho manual</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font:700 13px 'JetBrains Mono',monospace;border-bottom:2px solid #17151c;padding-bottom:2px">luizantoniopcb@gmail.com</span>
+          <span style="font:500 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45)" data-i18n="card.back.flip">vire o cartão ↻</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-reveal style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;opacity:0;transform:translateY(30px);transition:opacity .9s ease .6s,transform .9s cubic-bezier(.2,.6,.2,1) .6s">
+    <span style="font:500 12px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45)" data-i18n="hero.hint">passe o mouse no cartão · clique para virar</span>
+    <div id="scrollIndicator" style="display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;animation:fadeInUp 1s ease 3.5s forwards">
+      <span style="font:400 9px 'JetBrains Mono',monospace;color:rgba(23,21,28,.3);letter-spacing:.1em">SCROLL</span>
+      <div style="width:1px;height:24px;background:rgba(23,21,28,.1);overflow:hidden">
+        <div style="width:100%;height:100%;background:rgba(23,21,28,.35);animation:scrollAnim 1.8s ease-in-out infinite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" style="position:relative;height:220vh">
+  <div style="position:sticky;top:0;height:100vh;display:flex;align-items:center;padding:80px 44px;box-sizing:border-box">
+  <div style="display:grid;grid-template-columns:340px 1fr;gap:72px;max-width:1150px;margin:0 auto;align-items:center;width:100%">
+    <div id="sobreImgCol" style="opacity:0;transform:translateY(70px) rotate(-4deg) scale(.92);will-change:transform,opacity">
+      <div style="overflow:hidden;border-radius:8px;box-shadow:0 24px 50px -22px rgba(23,21,28,.35)">
+        <div id="aboutPhoto" style="will-change:transform">
+          <img src="/uploads/photo-1784041343379.jpeg" alt="Luiz Antônio" style="width:100%;height:410px;object-fit:cover;display:block">
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:12px;font:400 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45)"><span>fig. 01</span><span>criciúma, sc</span></div>
+    </div>
+    <div id="sobreTextCol" style="opacity:0;transform:translateY(90px);will-change:transform,opacity">
+      <p style="font:500 12px 'JetBrains Mono',monospace;color:oklch(0.6 0.16 150);letter-spacing:.14em;margin:0 0 22px" data-i18n="sobre.label">01 — SOBRE MIM</p>
+      <h2 style="margin:0 0 26px;font-weight:900;font-size:46px;line-height:1.05;letter-spacing:-.03em" data-i18n="sobre.headline">Sempre olho para o problema, pensando na ideia que irá <em style="font-style:normal;background:linear-gradient(90deg,oklch(0.62 0.17 85),oklch(0.6 0.15 205),oklch(0.62 0.17 325));background-size:300% 100%;animation:gradmove 4s ease infinite;-webkit-background-clip:text;background-clip:text;color:transparent">resolvê-lo</em>.</h2>
+      <p style="margin:0 0 14px;font:400 17px/1.7 system-ui,sans-serif;color:rgba(23,21,28,.65)" data-i18n="sobre.p1">Com mais de 3 anos transformando ideias em produtos digitais. Já ajudei e-commerces, ONGs e pequenos negócios a terem presença online com sistemas simples de usar e fáceis de manter.</p>
+      <p style="margin:0;font:400 17px/1.7 system-ui,sans-serif;color:rgba(23,21,28,.65)" data-i18n="sobre.p2">Para a sua empresa, isso significa mais tempo focada no que importa, enquanto a tecnologia funciona nos bastidores.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section id="projetos" style="position:relative;height:340vh">
+  <div style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;box-sizing:border-box;padding:90px 0 40px">
+    <div data-parallax="-0.12" style="position:absolute;top:70px;right:44px;font:900 150px 'Archivo Expanded',sans-serif;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(23,21,28,.09);pointer-events:none;will-change:transform">02</div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 44px;margin-bottom:30px">
+      <p style="font:500 12px 'JetBrains Mono',monospace;color:oklch(0.62 0.17 265);letter-spacing:.14em;margin:0" data-i18n="projetos.label">02 — PROJETOS (7)</p>
+      <p style="font:400 12px 'JetBrains Mono',monospace;color:rgba(23,21,28,.4);margin:0" data-i18n="projetos.hint">role para navegar →</p>
+    </div>
+    <div id="projTrack" style="display:flex;gap:32px;padding:0 44px;will-change:transform;width:max-content">
+
+      <a href="https://github.com/luizantoniopcbezerra/loom-ai" target="_blank" data-row data-img="/loom.png" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">
+        <div style="overflow:hidden;height:250px;background:#eceae4">
+          <div class="card-img" style="width:100%;height:100%;background-image:url('/loom.png');background-size:cover;background-position:top center"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+            <span style="font:700 13px 'JetBrains Mono',monospace;color:oklch(0.62 0.16 25)">01</span>
+            <span style="font:400 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45);text-align:right" data-i18n="projetos.card1.tags">Vue 3 · Spring Boot · SQLite</span>
+          </div>
+          <div style="font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08" data-i18n="projetos.card1.title">Loom — AI Project Management</div>
+          <p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)" data-i18n="projetos.card1.desc">Control plane open-source e 100% local para orquestrar agentes de IA de código.</p>
+          <span style="margin-top:auto;font:700 12px 'JetBrains Mono',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span data-i18n="projetos.cta">ver projeto</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/luizantoniopcbezerra/mcp-master-of-puppets" target="_blank" data-row data-img="/diagram.png" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">
+        <div style="overflow:hidden;height:250px;background:#eceae4">
+          <div class="card-img" style="width:100%;height:100%;background-image:url('/diagram.png');background-size:cover;background-position:top center"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+            <span style="font:700 13px 'JetBrains Mono',monospace;color:oklch(0.62 0.16 85)">02</span>
+            <span style="font:400 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45);text-align:right" data-i18n="projetos.card2.tags">Python · MCP · YAML</span>
+          </div>
+          <div style="font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08" data-i18n="projetos.card2.title">MCP Master of Puppets</div>
+          <p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)" data-i18n="projetos.card2.desc">Servidor MCP para comunicação assíncrona entre agentes de IA, com inboxes versionadas no git.</p>
+          <span style="margin-top:auto;font:700 12px 'JetBrains Mono',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span data-i18n="projetos.cta">ver projeto</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/arturoburigo/Adopet" target="_blank" data-row data-img="/adopet.png" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">
+        <div style="overflow:hidden;height:250px;background:#eceae4">
+          <div class="card-img" style="width:100%;height:100%;background-image:url('/adopet.png');background-size:cover;background-position:top center"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+            <span style="font:700 13px 'JetBrains Mono',monospace;color:oklch(0.62 0.16 145)">03</span>
+            <span style="font:400 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45);text-align:right" data-i18n="projetos.card3.tags">React · Java · PostgreSQL</span>
+          </div>
+          <div style="font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08" data-i18n="projetos.card3.title">APA São Ludgero</div>
+          <p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)" data-i18n="projetos.card3.desc">Sistema web para ONG, com cadastro de animais, adoção e doações.</p>
+          <span style="margin-top:auto;font:700 12px 'JetBrains Mono',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span data-i18n="projetos.cta">ver projeto</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>
+        </div>
+      </a>
+
+      <a href="https://curadalmaciganovladimir.com/" target="_blank" data-row data-img="/curadalmaciganovladimir.jpg" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">
+        <div style="overflow:hidden;height:250px;background:#eceae4">
+          <div class="card-img" style="width:100%;height:100%;background-image:url('/curadalmaciganovladimir.jpg');background-size:cover;background-position:top center"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+            <span style="font:700 13px 'JetBrains Mono',monospace;color:oklch(0.62 0.16 205)">04</span>
+            <span style="font:400 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45);text-align:right" data-i18n="projetos.card4.tags">HTML · CSS · JS</span>
+          </div>
+          <div style="font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08" data-i18n="projetos.card4.title">A Cura D'Alma</div>
+          <p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)" data-i18n="projetos.card4.desc">Landing page para taróloga — serviços, valores e redes sociais.</p>
+          <span style="margin-top:auto;font:700 12px 'JetBrains Mono',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span data-i18n="projetos.cta">ver projeto</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>
+        </div>
+      </a>
+
+      <a href="https://doskigitattoo.netlify.app/" target="_blank" data-row data-img="/doskigiportfolio.jpg" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">
+        <div style="overflow:hidden;height:250px;background:#eceae4">
+          <div class="card-img" style="width:100%;height:100%;background-image:url('/doskigiportfolio.jpg');background-size:cover;background-position:top center"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+            <span style="font:700 13px 'JetBrains Mono',monospace;color:oklch(0.62 0.16 265)">05</span>
+            <span style="font:400 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45);text-align:right" data-i18n="projetos.card5.tags">HTML · CSS · JS</span>
+          </div>
+          <div style="font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08" data-i18n="projetos.card5.title">Doski Gi Tattoo</div>
+          <p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)" data-i18n="projetos.card5.desc">Portfólio para tatuadora, com trabalhos, contato e redes.</p>
+          <span style="margin-top:auto;font:700 12px 'JetBrains Mono',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span data-i18n="projetos.cta">ver projeto</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>
+        </div>
+      </a>
+
+      <a href="https://hblofertas.com.br/" target="_blank" data-row data-img="/hblofertas.jpg" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">
+        <div style="overflow:hidden;height:250px;background:#eceae4">
+          <div class="card-img" style="width:100%;height:100%;background-image:url('/hblofertas.jpg');background-size:cover;background-position:top center"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">
+          <div style="display:justify:space-between;align-items:baseline;gap:16px">
+            <span style="font:700 13px 'JetBrains Mono',monospace;color:oklch(0.62 0.16 325)">06</span>
+            <span style="font:400 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45);text-align:right" data-i18n="projetos.card6.tags">Next.js · React · CSS</span>
+          </div>
+          <div style="font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08" data-i18n="projetos.card6.title">HBL Ofertas — Frontend</div>
+          <p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)" data-i18n="projetos.card6.desc">Sistema web de ofertas, com cadastro de produtos e gerenciamento.</p>
+          <span style="margin-top:auto;font:700 12px 'JetBrains Mono',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span data-i18n="projetos.cta">ver projeto</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>
+        </div>
+      </a>
+
+      <a href="https://github.com/bezerraluiz/hbl-ofertas-backend" target="_blank" data-row data-img="/diagram.png" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">
+        <div style="overflow:hidden;height:250px;background:#eceae4">
+          <div class="card-img" style="width:100%;height:100%;background-image:url('/diagram.png');background-size:cover;background-position:top center"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+            <span style="font:700 13px 'JetBrains Mono',monospace;color:oklch(0.62 0.16 25)">07</span>
+            <span style="font:400 11px 'JetBrains Mono',monospace;color:rgba(23,21,28,.45);text-align:right" data-i18n="projetos.card7.tags">Node · Fastify · TypeScript · PostgreSQL</span>
+          </div>
+          <div style="font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08" data-i18n="projetos.card7.title">HBL Ofertas — Backend</div>
+          <p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)" data-i18n="projetos.card7.desc">CRUD completo com integração ao Google Drive para imagens.</p>
+          <span style="margin-top:auto;font:700 12px 'JetBrains Mono',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span data-i18n="projetos.cta">ver projeto</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>
+        </div>
+      </a>
+
+    </div>
+    <div style="margin:34px 44px 0;height:2px;background:rgba(23,21,28,.12);border-radius:99px;overflow:hidden">
+      <div id="projProgress" style="height:100%;width:0%;background:linear-gradient(90deg,oklch(0.62 0.17 25),oklch(0.62 0.17 145),oklch(0.62 0.17 265))"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HACKATHON -->
+<section id="hackathons" style="position:relative;height:250vh">
+  <div style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:flex-end;box-sizing:border-box;overflow:hidden">
+  <img id="hackImg" src="/uploads/pasted-1784050253780-0.png" alt="Premiação do Hackathon Code4Cancer no XXVI Congresso SBOC 2025" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.3);will-change:transform">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,20,.45) 0%,rgba(10,9,20,.15) 38%,rgba(10,9,20,.55) 68%,rgba(10,9,20,.92) 100%)"></div>
+  <div style="position:relative;padding:0 44px">
+    <p data-reveal style="font:500 12px 'JetBrains Mono',monospace;color:#fff;letter-spacing:.14em;margin:0 0 14px;text-shadow:0 1px 12px rgba(0,0,0,.5);opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.6,.2,1)" data-i18n="hackathon.label">03 — HACKATHON · 1º SBOC · 2025</p>
+    <div data-maskreveal style="overflow:hidden"><h2 style="margin:0;font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:min(6.8vw,96px);line-height:1.05;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px #fff;text-shadow:0 2px 30px rgba(0,0,0,.35);transform:translateY(110%);transition:transform 1s cubic-bezier(.16,.8,.24,1) .1s" data-i18n="hackathon.place">3º lugar no</h2></div>
+    <div data-maskreveal style="overflow:hidden"><h2 style="margin:0;font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:min(6.8vw,96px);line-height:1.05;letter-spacing:-.04em;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.45);transform:translateY(110%);transition:transform 1s cubic-bezier(.16,.8,.24,1) .25s" data-i18n="hackathon.event">Code4Cancer</h2></div>
+  </div>
+  <div style="position:relative;display:grid;grid-template-columns:1fr 1fr auto;gap:44px;align-items:end;padding:34px 44px 40px">
+    <p data-reveal style="margin:0;font:400 15px/1.7 system-ui,sans-serif;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.55);opacity:0;transform:translateY(26px);transition:opacity .8s ease .3s,transform .8s cubic-bezier(.2,.6,.2,1) .3s" data-i18n="hackathon.p1">48h ininterruptas de desenvolvimento no XXVI Congresso Brasileiro de Oncologia Clínica — mais de 200 participantes em 30 equipes. Chegamos à final entre as 5 mais votadas e apresentamos o pitch no palco do Congresso.</p>
+    <p data-reveal style="margin:0;font:400 15px/1.7 system-ui,sans-serif;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.55);opacity:0;transform:translateY(26px);transition:opacity .8s ease .4s,transform .8s cubic-bezier(.2,.6,.2,1) .4s" data-i18n="hackathon.p2">Nossa solução, o <strong>Me Cuidar</strong>, integra agendamento de consultas e exames no SUS, com lembretes personalizados e rastreamento baseado no histórico do paciente.</p>
+    <a data-reveal data-hover href="https://sboc.org.br/noticias/3833-conheca-os-vencedores-do-1-hackathon-sboc/" target="_blank" style="font:700 13px 'JetBrains Mono',monospace;color:#fff;border-bottom:2px solid #fff;padding-bottom:3px;white-space:nowrap;text-shadow:0 1px 10px rgba(0,0,0,.55);opacity:0;transform:translateY(26px);transition:opacity .8s ease .5s,transform .8s cubic-bezier(.2,.6,.2,1) .5s" data-i18n="hackathon.cta">notícia oficial ↗</a>
+  </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" style="min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:80px 44px 40px;box-sizing:border-box;text-align:center;position:relative;overflow:hidden">
+  <div data-parallax="0.1" style="position:absolute;top:10%;left:0;right:0;display:flex;justify-content:center;font:900 min(22vw,320px) 'Archivo Expanded',sans-serif;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(23,21,28,.06);pointer-events:none;white-space:nowrap;will-change:transform">CONTATO</div>
+  <p data-reveal style="font:500 12px 'JetBrains Mono',monospace;color:rgba(23,21,28,.5);letter-spacing:.14em;margin:0 0 40px;opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.6,.2,1);position:relative" data-i18n="contato.label">04 — TEM UM PROJETO EM MENTE?</p>
+  <div style="overflow:hidden;padding:6px 0"><a id="emailLink" data-magnet href="mailto:luizantoniopcb@gmail.com" style="display:inline-block;font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:min(7.4vw,110px);letter-spacing:-.04em;line-height:1.05;will-change:transform;transform:translateY(115%);color:#17151c;-webkit-text-stroke:1.5px #17151c">luizantoniopcb@gmail.com</a></div>
+  <div data-reveal style="display:flex;justify-content:center;gap:32px;margin:48px 0 100px;font:500 13px 'JetBrains Mono',monospace;color:rgba(23,21,28,.6);opacity:0;transition:opacity .9s ease .25s">
+    <a href="https://github.com/luizantoniopcbezerra" target="_blank" data-hover data-i18n="contato.github">github ↗</a>
+    <a href="https://www.linkedin.com/" target="_blank" data-hover data-i18n="contato.linkedin">linkedin ↗</a>
+  </div>
+  <div style="margin-top:auto;align-self:stretch;width:100%;box-sizing:border-box;display:flex;justify-content:space-between;gap:24px;font:400 12px 'JetBrains Mono',monospace;color:rgba(23,21,28,.4)">
+    <span data-i18n="footer.copyright">© 2026 luiz antônio pc bezerra</span>
+    <span id="clock"></span>
+    <span data-i18n="footer.location">criciúma, sc — brasil</span>
+  </div>
+  <div style="height:5px;position:absolute;bottom:0;left:0;right:0;background:linear-gradient(90deg,oklch(0.62 0.17 25),oklch(0.62 0.17 85),oklch(0.62 0.17 145),oklch(0.62 0.17 205),oklch(0.62 0.17 265),oklch(0.62 0.17 325))"></div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+
+  // --- Preloader ---
+  let doneLoading = false;
+  const loadPct = document.getElementById('loadPct');
+  const preloader = document.getElementById('preloader');
+
+  const start = performance.now();
+  const dur = 1400;
+
+  function tick(now) {
+    const p = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - p, 3);
+    if (loadPct) loadPct.textContent = Math.round(eased * 100) + '%';
+    if (p < 1) requestAnimationFrame(tick);
+    else setTimeout(finishLoad, 150);
+  }
+  requestAnimationFrame(tick);
+  setTimeout(function() { if (!doneLoading) finishLoad(); }, 2600);
+
+  function finishLoad() {
+    if (doneLoading) return;
+    doneLoading = true;
+    if (preloader) {
+      preloader.style.clipPath = 'inset(0 0 100% 0)';
+      preloader.style.pointerEvents = 'none';
+    }
+
+    // Card interaction
+    const card = document.getElementById('bizCard');
+    if (card) {
+      setTimeout(function() {
+        card.style.animation = 'none';
+        card.style.transition = 'transform .18s ease-out';
+        cardReady = true;
+      }, 3300);
+    }
+
+    // Ensure email animation after load
+    const emailLink = document.getElementById('emailLink');
+    if (emailLink && emailLink.parentElement) {
+      emailLink.style.transform = 'translateY(115%)';
+      emailLink.style.transition = 'transform 1s cubic-bezier(.16,.8,.24,1), color 1s cubic-bezier(.4,0,.2,1) .55s, -webkit-text-stroke .9s cubic-bezier(.4,0,.2,1) .55s, letter-spacing 1.1s cubic-bezier(.16,.8,.24,1)';
+      emailLink.style.color = '#17151c';
+      emailLink.style.webkitTextStroke = '1.5px #17151c';
+
+      emailObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            emailLink.style.transform = 'translateY(0)';
+            emailLink.style.letterSpacing = '-.02em';
+            emailLink.style.color = '#f6f4ef';
+            setTimeout(function() {
+              if (emailLink.parentElement) emailLink.parentElement.style.overflow = 'visible';
+            }, 1100);
+            if (emailObserver) emailObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      emailObserver.observe(emailLink.parentElement);
+    }
+
+    initRevealObserver();
+    initMaskRevealObserver();
+    bindInteractions();
+  }
+
+  // --- Reveal Observer ---
+  let revealObserver;
+
+  function initRevealObserver() {
+    if (revealObserver) revealObserver.disconnect();
+    revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(el) {
+        if (el.isIntersecting) {
+          el.target.style.opacity = '1';
+          el.target.style.filter = 'blur(0px)';
+          el.target.style.transform = (el.target.dataset.origTransform || el.target.style.transform)
+            .replace(/translateY\([^)]*\)/, 'translateY(0)')
+            .replace(/translateX\([^)]*\)/, 'translateX(0)')
+            .replace(/rotate\([^)]*\)/, 'rotate(0deg)')
+            .replace(/scale\([^)]*\)/, 'scale(1)');
+          el.target.dataset.revealed = '1';
+        } else if (el.target.dataset.revealed === '1') {
+          var r = el.target.getBoundingClientRect();
+          var dir = r.top < 0 ? -1 : 1;
+          el.target.style.opacity = '0';
+          el.target.style.filter = 'blur(8px)';
+          el.target.style.transform = 'translateY(' + (28 * dir) + 'px)';
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -4% 0px' });
+
+    document.querySelectorAll('[data-reveal]').forEach(function(el) {
+      if (el.style.transition) el.style.transition += ',filter .9s ease';
+      el.style.filter = 'blur(14px)';
+      el.dataset.origTransform = el.style.transform || '';
+      revealObserver.observe(el);
+    });
+  }
+
+  // --- Mask Reveal Observer ---
+  let maskObserver;
+
+  function initMaskRevealObserver() {
+    if (maskObserver) maskObserver.disconnect();
+    maskObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        var child = e.target.firstElementChild;
+        if (!child) return;
+        child.style.transform = e.isIntersecting ? 'translateY(0)' : 'translateY(110%)';
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('[data-maskreveal]').forEach(function(el) {
+      maskObserver.observe(el);
+    });
+  }
+
+  // --- Interactions ---
+  var cardReady = false;
+  var _projX, _projTargetX;
+  var emailObserver;
+
+  function bindInteractions() {
+    // Custom cursor
+    var dot = document.getElementById('cursorDot');
+    var ring = document.getElementById('cursorRing');
+    var mx = -100, my = -100, rx = -100, ry = -100;
+    var hoverBig = false;
+
+    window.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; }, { passive: true });
+    document.addEventListener('mouseover', function(e) {
+      hoverBig = !!e.target.closest('a,[data-hover],[data-row]');
+    });
+
+    // Floating preview
+    var floatEl = document.getElementById('floatPrev');
+    var floatImg = document.getElementById('floatImg');
+    var fx = 0, fy = 0, prevOn = false;
+
+    function loop() {
+      rx += (mx - rx) * 0.16;
+      ry += (my - ry) * 0.16;
+      if (dot) dot.style.transform = 'translate(' + (mx - 4) + 'px,' + (my - 4) + 'px)';
+      if (ring) {
+        var s = hoverBig ? 62 : 38;
+        ring.style.width = s + 'px';
+        ring.style.height = s + 'px';
+        ring.style.transform = 'translate(' + (rx - s / 2) + 'px,' + (ry - s / 2) + 'px)';
+      }
+
+      // Project track lerp
+      if (_projTargetX !== undefined) {
+        _projX = (_projX === undefined) ? 0 : _projX;
+        _projX += (_projTargetX - _projX) * 0.09;
+        var track = document.getElementById('projTrack');
+        if (track) track.style.transform = 'translateX(' + (-_projX.toFixed(1)) + 'px)';
+      }
+
+      // Parallax lerp
+      if (_plx && _plxTarget) {
+        _plx.forEach(function(p, i) {
+          var t = _plxTarget[i];
+          if (t === null || t === undefined) return;
+          p.cur += (t - p.cur) * 0.1;
+          p.el.style.translate = '0 ' + p.cur.toFixed(2) + 'px';
+        });
+      }
+
+      // Floating preview lerp
+      if (prevOn && floatEl) {
+        fx += (mx - fx) * 0.12;
+        fy += (my - fy) * 0.12;
+        var tilt = Math.max(-6, Math.min(6, (mx - fx) * 0.15));
+        floatEl.style.transform = 'translate(' + (fx + 26) + 'px,' + (fy - 95) + 'px) rotate(' + tilt + 'deg) scale(1)';
+      }
+
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    // 3D card tilt/flip
+    var card = document.getElementById('bizCard');
+    var cardFlip = 0;
+    if (card) {
+      card.addEventListener('mousemove', function(e) {
+        if (!cardReady) return;
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = 'rotateY(' + (cardFlip * 180 + px * 16) + 'deg) rotateX(' + (-py * 14) + 'deg)';
+        var shine = document.getElementById('cardShine');
+        if (shine) {
+          shine.style.opacity = '1';
+          shine.style.background = 'radial-gradient(circle 320px at ' + ((px + 0.5) * 100) + '% ' + ((py + 0.5) * 100) + '%,rgba(255,255,255,.14),transparent 70%)';
+        }
+      });
+      card.addEventListener('mouseleave', function() {
+        if (!cardReady) return;
+        card.style.transition = 'transform .6s cubic-bezier(.2,.6,.2,1)';
+        card.style.transform = 'rotateY(' + (cardFlip * 180) + 'deg) rotateX(0deg)';
+        var shine = document.getElementById('cardShine');
+        if (shine) shine.style.opacity = '0';
+        setTimeout(function() { card.style.transition = 'transform .18s ease-out'; }, 650);
+      });
+      card.addEventListener('click', function() {
+        if (!cardReady) return;
+        cardFlip = 1 - cardFlip;
+        card.style.transition = 'transform .9s cubic-bezier(.3,.9,.3,1)';
+        card.style.transform = 'rotateY(' + (cardFlip * 180) + 'deg)';
+        setTimeout(function() { card.style.transition = 'transform .18s ease-out'; }, 950);
+      });
+    }
+
+    // Project row stagger
+    document.querySelectorAll('[data-row]').forEach(function(row, i) {
+      row.style.transitionDelay = Math.min(i * 70, 350) + 'ms, ' + Math.min(i * 70, 350) + 'ms, 0ms, 0ms';
+    });
+
+    // Floating preview on project hover
+    document.querySelectorAll('[data-row]').forEach(function(row) {
+      row.addEventListener('mouseenter', function(e) {
+        var src = row.getAttribute('data-img');
+        if (!src) return;
+        if (floatImg) floatImg.src = src;
+        fx = e.clientX;
+        fy = e.clientY;
+        prevOn = true;
+        if (floatEl) floatEl.style.opacity = '1';
+      });
+      row.addEventListener('mouseleave', function() {
+        prevOn = false;
+        if (floatEl) {
+          floatEl.style.opacity = '0';
+          floatEl.style.transform += ' scale(.85)';
+        }
+      });
+    });
+
+    // Scroll effects
+    var _plx, _plxTarget;
+
+    var onScroll = function() {
+      try {
+        var y = window.scrollY;
+        var vh = window.innerHeight;
+        var max = document.documentElement.scrollHeight - vh;
+        var bar = document.getElementById('scrollBar');
+        if (bar) bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+
+        // Hero card floats on scroll
+        var cardWrap = document.getElementById('bizCard');
+        if (cardWrap && cardWrap.parentElement && y < vh && cardReady) {
+          var p = y / vh;
+          cardWrap.parentElement.parentElement.style.opacity = String(Math.max(0, 1 - p * 1.2));
+          cardWrap.parentElement.style.translate = '0 ' + (y * 0.3) + 'px';
+        }
+
+        // Generic parallax
+        if (!_plx) {
+          _plx = Array.from(document.querySelectorAll('[data-parallax]')).map(function(el) {
+            return { el: el, speed: parseFloat(el.getAttribute('data-parallax')) || 0, cur: 0 };
+          });
+        }
+        _plxTarget = _plx.map(function(item) {
+          var r = item.el.getBoundingClientRect();
+          if (r.top < vh + 200 && r.bottom > -200) {
+            var center = r.top + r.height / 2 - vh / 2;
+            return center * item.speed * -1;
+          }
+          return null;
+        });
+
+        var clamp01 = function(v) { return Math.min(1, Math.max(0, v)); };
+        var easeOut = function(t) { return 1 - Math.pow(1 - t, 3); };
+        var pinProg = function(el) { return clamp01(-el.getBoundingClientRect().top / (el.offsetHeight - vh)); };
+
+        // Sobre section
+        var sobre = document.getElementById('sobre');
+        if (sobre) {
+          var sp = pinProg(sobre);
+          var imgCol = document.getElementById('sobreImgCol');
+          var txtCol = document.getElementById('sobreTextCol');
+          if (imgCol) {
+            var st = easeOut(clamp01(sp / 0.45));
+            imgCol.style.opacity = st.toFixed(3);
+            imgCol.style.transform = 'translateY(' + ((1 - st) * 70) + 'px) rotate(' + (-4 * (1 - st)) + 'deg) scale(' + (0.92 + 0.08 * st).toFixed(3) + ')';
+          }
+          if (txtCol) {
+            var st2 = easeOut(clamp01((sp - 0.12) / 0.5));
+            txtCol.style.opacity = st2.toFixed(3);
+            txtCol.style.transform = 'translateY(' + ((1 - st2) * 90) + 'px)';
+          }
+        }
+
+        // Hackathon: cinematic zoom
+        var hack = document.getElementById('hackathons');
+        var hackImg = document.getElementById('hackImg');
+        if (hack && hackImg) {
+          var hp = easeOut(pinProg(hack));
+          hackImg.style.transform = 'scale(' + (1.3 - 0.3 * hp).toFixed(3) + ')';
+        }
+
+        // Projects: horizontal scroll
+        var projSec = document.getElementById('projetos');
+        var projTrack = document.getElementById('projTrack');
+        if (projSec && projTrack) {
+          var rs = projSec.getBoundingClientRect();
+          var total = projSec.offsetHeight - vh;
+          var prog = Math.min(1, Math.max(0, -rs.top / total));
+          var maxX = Math.max(0, projTrack.scrollWidth - window.innerWidth + 44);
+          _projX = (_projX === undefined) ? prog * maxX : _projX;
+          _projTargetX = prog * maxX;
+          var pbar = document.getElementById('projProgress');
+          if (pbar) pbar.style.width = (prog * 100) + '%';
+        }
+
+        // Photo scroll-zoom
+        var zoomEl = document.getElementById('aboutPhoto');
+        if (zoomEl) {
+          var zr = zoomEl.getBoundingClientRect();
+          if (zr.top < vh && zr.bottom > 0) {
+            var zProg = 1 - Math.min(1, Math.max(0, (zr.top + zr.height / 2) / vh));
+            zoomEl.style.transform = 'scale(' + (1.25 - zProg * 0.25) + ')';
+          }
+        }
+      } catch (err) { console.error('onScroll', err); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Magnetic email
+    var mag = document.querySelector('[data-magnet]');
+    if (mag) {
+      mag.addEventListener('mousemove', function(e) {
+        var r = mag.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2);
+        var dy = e.clientY - (r.top + r.height / 2);
+        mag.style.transform = 'translate(' + (dx * 0.08) + 'px,' + (dy * 0.3) + 'px)';
+      });
+      mag.addEventListener('mouseleave', function() { mag.style.transform = 'translateY(0)'; });
+    }
+  }
+
+  // --- Clock ---
+  var clock = document.getElementById('clock');
+  if (clock) {
+    function updateClock() {
+      clock.textContent = new Date().toLocaleTimeString('pt-BR') + ' BRT';
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  }
+
+  // --- PT/EN Toggle ---
+  var currentLang = 'pt';
+  var langToggle = document.getElementById('langToggle');
+
+  var translations = {
+    'preloader.text': { pt: 'luiz antônio pc bezerra — engenheiro de software', en: 'luiz antônio pc bezerra — software engineer' },
+    'nav.sobre': { pt: 'sobre', en: 'about' },
+    'nav.projetos': { pt: 'projetos', en: 'projects' },
+    'nav.hackathons': { pt: 'hackathons', en: 'hackathons' },
+    'nav.contato': { pt: 'contato', en: 'contact' },
+    'card.title': { pt: 'ENGENHEIRO DE SOFTWARE', en: 'SOFTWARE ENGINEER' },
+    'card.status': { pt: '● disponível', en: '● available' },
+    'card.tagline': { pt: 'Crio sites e sistemas que ajudam o seu negócio a vender mais e trabalhar melhor.', en: 'I build websites and systems that help your business sell more and work better.' },
+    'card.back.title': { pt: 'COMO POSSO AJUDAR', en: 'HOW I CAN HELP' },
+    'card.back.item1': { pt: 'Entendendo problemas, desenvolvendo soluções.', en: 'Understanding problems, developing solutions.' },
+    'card.back.item2': { pt: 'Sistemas sob medida que organizam sua operação', en: 'Custom systems that organize your operation' },
+    'card.back.item3': { pt: 'Automações que economizam horas de trabalho manual', en: 'Automations that save hours of manual work' },
+    'card.back.flip': { pt: 'vire o cartão ↻', en: 'flip the card ↻' },
+    'hero.hint': { pt: 'passe o mouse no cartão · clique para virar', en: 'hover the card · click to flip' },
+    'sobre.label': { pt: '01 — SOBRE MIM', en: '01 — ABOUT ME' },
+    'sobre.headline': { pt: 'Sempre olho para o problema, pensando na ideia que irá <em style="font-style:normal;background:linear-gradient(90deg,oklch(0.62 0.17 85),oklch(0.6 0.15 205),oklch(0.62 0.17 325));background-size:300% 100%;animation:gradmove 4s ease infinite;-webkit-background-clip:text;background-clip:text;color:transparent">resolvê-lo</em>.', en: 'I always look at the problem, thinking of the idea that will <em style="font-style:normal;background:linear-gradient(90deg,oklch(0.62 0.17 85),oklch(0.6 0.15 205),oklch(0.62 0.17 325));background-size:300% 100%;animation:gradmove 4s ease infinite;-webkit-background-clip:text;background-clip:text;color:transparent">solve it</em>.' },
+    'sobre.p1': { pt: 'Com mais de 3 anos transformando ideias em produtos digitais. Já ajudei e-commerces, ONGs e pequenos negócios a terem presença online com sistemas simples de usar e fáceis de manter.', en: 'Over 3 years turning ideas into digital products. I have helped e-commerces, NGOs, and small businesses build an online presence with simple, maintainable systems.' },
+    'sobre.p2': { pt: 'Para a sua empresa, isso significa mais tempo focada no que importa, enquanto a tecnologia funciona nos bastidores.', en: 'For your business, that means more time focused on what matters, while technology works behind the scenes.' },
+    'projetos.label': { pt: '02 — PROJETOS (7)', en: '02 — PROJECTS (7)' },
+    'projetos.hint': { pt: 'role para navegar →', en: 'scroll to browse →' },
+    'projetos.cta': { pt: 'ver projeto', en: 'view project' },
+    'projetos.card1.tags': { pt: 'Vue 3 · Spring Boot · SQLite', en: 'Vue 3 · Spring Boot · SQLite' },
+    'projetos.card1.title': { pt: 'Loom — AI Project Management', en: 'Loom — AI Project Management' },
+    'projetos.card1.desc': { pt: 'Control plane open-source e 100% local para orquestrar agentes de IA de código.', en: 'Open-source, 100% local control plane for orchestrating AI coding agents.' },
+    'projetos.card2.tags': { pt: 'Python · MCP · YAML', en: 'Python · MCP · YAML' },
+    'projetos.card2.title': { pt: 'MCP Master of Puppets', en: 'MCP Master of Puppets' },
+    'projetos.card2.desc': { pt: 'Servidor MCP para comunicação assíncrona entre agentes de IA, com inboxes versionadas no git.', en: 'MCP server for async communication between AI agents, with git-versioned inboxes.' },
+    'projetos.card3.tags': { pt: 'React · Java · PostgreSQL', en: 'React · Java · PostgreSQL' },
+    'projetos.card3.title': { pt: 'APA São Ludgero', en: 'APA São Ludgero' },
+    'projetos.card3.desc': { pt: 'Sistema web para ONG, com cadastro de animais, adoção e doações.', en: 'Web system for an NGO, with animal registration, adoption, and donations.' },
+    'projetos.card4.tags': { pt: 'HTML · CSS · JS', en: 'HTML · CSS · JS' },
+    'projetos.card4.title': { pt: 'A Cura D\'Alma', en: 'A Cura D\'Alma' },
+    'projetos.card4.desc': { pt: 'Landing page para taróloga — serviços, valores e redes sociais.', en: 'Landing page for a tarot reader — services, values, and social media.' },
+    'projetos.card5.tags': { pt: 'HTML · CSS · JS', en: 'HTML · CSS · JS' },
+    'projetos.card5.title': { pt: 'Doski Gi Tattoo', en: 'Doski Gi Tattoo' },
+    'projetos.card5.desc': { pt: 'Portfólio para tatuadora, com trabalhos, contato e redes.', en: 'Portfolio for a tattoo artist, with work, contact, and social media.' },
+    'projetos.card6.tags': { pt: 'Next.js · React · CSS', en: 'Next.js · React · CSS' },
+    'projetos.card6.title': { pt: 'HBL Ofertas — Frontend', en: 'HBL Ofertas — Frontend' },
+    'projetos.card6.desc': { pt: 'Sistema web de ofertas, com cadastro de produtos e gerenciamento.', en: 'Web system for deals, with product registration and management.' },
+    'projetos.card7.tags': { pt: 'Node · Fastify · TypeScript · PostgreSQL', en: 'Node · Fastify · TypeScript · PostgreSQL' },
+    'projetos.card7.title': { pt: 'HBL Ofertas — Backend', en: 'HBL Ofertas — Backend' },
+    'projetos.card7.desc': { pt: 'CRUD completo com integração ao Google Drive para imagens.', en: 'Full CRUD with Google Drive integration for images.' },
+    'hackathon.label': { pt: '03 — HACKATHON · 1º SBOC · 2025', en: '03 — HACKATHON · 1st SBOC · 2025' },
+    'hackathon.place': { pt: '3º lugar no', en: '3rd place at' },
+    'hackathon.event': { pt: 'Code4Cancer', en: 'Code4Cancer' },
+    'hackathon.p1': { pt: '48h ininterruptas de desenvolvimento no XXVI Congresso Brasileiro de Oncologia Clínica — mais de 200 participantes em 30 equipes. Chegamos à final entre as 5 mais votadas e apresentamos o pitch no palco do Congresso.', en: '48 straight hours of development at the XXVI Brazilian Congress of Clinical Oncology — over 200 participants in 30 teams. We made the finals among the top 5 and pitched on the Congress stage.' },
+    'hackathon.p2': { pt: 'Nossa solução, o <strong>Me Cuidar</strong>, integra agendamento de consultas e exames no SUS, com lembretes personalizados e rastreamento baseado no histórico do paciente.', en: 'Our solution, <strong>Me Cuidar</strong>, integrates appointment and exam scheduling in the public health system, with personalized reminders and patient history tracking.' },
+    'hackathon.cta': { pt: 'notícia oficial ↗', en: 'official news ↗' },
+    'contato.label': { pt: '04 — TEM UM PROJETO EM MENTE?', en: '04 — HAVE A PROJECT IN MIND?' },
+    'contato.github': { pt: 'github ↗', en: 'github ↗' },
+    'contato.linkedin': { pt: 'linkedin ↗', en: 'linkedin ↗' },
+    'footer.copyright': { pt: '© 2026 luiz antônio pc bezerra', en: '© 2026 luiz antônio pc bezerra' },
+    'footer.location': { pt: 'criciúma, sc — brasil', en: 'criciúma, sc — brazil' }
+  };
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (translations[key] && translations[key][lang]) {
+        var html = el.innerHTML;
+        var hasHTML = html !== el.textContent;
+        if (hasHTML) {
+          el.innerHTML = translations[key][lang];
+        } else {
+          el.textContent = translations[key][lang];
+        }
+      }
+    });
+    currentLang = lang;
+    langToggle.textContent = lang === 'pt' ? 'PT/EN' : 'EN/PT';
+  }
+
+  if (langToggle) {
+    langToggle.addEventListener('click', function() {
+      applyLang(currentLang === 'pt' ? 'en' : 'pt');
+    });
+  }
+
+})();
+</script>
+</body>
 </html>
