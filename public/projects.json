@@ -1,0 +1,78 @@
+{
+  "projects": [
+    {
+      "title": { "pt": "Loom — AI Project Management", "en": "Loom — AI Project Management" },
+      "desc": {
+        "pt": "Control plane open-source e 100% local para orquestrar agentes de IA de código.",
+        "en": "Open-source, 100% local control plane for orchestrating AI coding agents."
+      },
+      "tags": { "pt": "Vue 3 · Spring Boot · SQLite", "en": "Vue 3 · Spring Boot · SQLite" },
+      "url": "https://github.com/luizantoniopcbezerra/loom-ai",
+      "img": "loom.png",
+      "githubRepo": "luizantoniopcbezerra/loom-ai"
+    },
+    {
+      "title": { "pt": "MCP Master of Puppets", "en": "MCP Master of Puppets" },
+      "desc": {
+        "pt": "Servidor MCP para comunicação assíncrona entre agentes de IA, com inboxes versionadas no git.",
+        "en": "MCP server for async communication between AI agents, with git-versioned inboxes."
+      },
+      "tags": { "pt": "Python · MCP · YAML", "en": "Python · MCP · YAML" },
+      "url": "https://github.com/luizantoniopcbezerra/mcp-master-of-puppets",
+      "img": "diagram.png",
+      "githubRepo": "luizantoniopcbezerra/mcp-master-of-puppets"
+    },
+    {
+      "title": { "pt": "APA São Ludgero", "en": "APA São Ludgero" },
+      "desc": {
+        "pt": "Sistema web para ONG, com cadastro de animais, adoção e doações.",
+        "en": "Web system for an NGO, with animal registration, adoption, and donations."
+      },
+      "tags": { "pt": "React · Java · PostgreSQL", "en": "React · Java · PostgreSQL" },
+      "url": "https://github.com/arturoburigo/Adopet",
+      "img": "adopet.png",
+      "githubRepo": "arturoburigo/Adopet"
+    },
+    {
+      "title": { "pt": "A Cura D'Alma", "en": "A Cura D'Alma" },
+      "desc": {
+        "pt": "Landing page para taróloga — serviços, valores e redes sociais.",
+        "en": "Landing page for a tarot reader — services, values, and social media."
+      },
+      "tags": { "pt": "HTML · CSS · JS", "en": "HTML · CSS · JS" },
+      "url": "https://curadalmaciganovladimir.com/",
+      "img": "curadalmaciganovladimir.jpg"
+    },
+    {
+      "title": { "pt": "Doski Gi Tattoo", "en": "Doski Gi Tattoo" },
+      "desc": {
+        "pt": "Portfólio para tatuadora, com trabalhos, contato e redes.",
+        "en": "Portfolio for a tattoo artist, with work, contact, and social media."
+      },
+      "tags": { "pt": "HTML · CSS · JS", "en": "HTML · CSS · JS" },
+      "url": "https://doskigitattoo.netlify.app/",
+      "img": "doskigiportfolio.jpg"
+    },
+    {
+      "title": { "pt": "HBL Ofertas — Frontend", "en": "HBL Ofertas — Frontend" },
+      "desc": {
+        "pt": "Sistema web de ofertas, com cadastro de produtos e gerenciamento.",
+        "en": "Web system for deals, with product registration and management."
+      },
+      "tags": { "pt": "Next.js · React · CSS", "en": "Next.js · React · CSS" },
+      "url": "https://hblofertas.com.br/",
+      "img": "hblofertas.jpg"
+    },
+    {
+      "title": { "pt": "HBL Ofertas — Backend", "en": "HBL Ofertas — Backend" },
+      "desc": {
+        "pt": "CRUD completo com integração ao Google Drive para imagens.",
+        "en": "Full CRUD with Google Drive integration for images."
+      },
+      "tags": { "pt": "Node · Fastify · TypeScript · PostgreSQL", "en": "Node · Fastify · TypeScript · PostgreSQL" },
+      "url": "https://github.com/bezerraluiz/hbl-ofertas-backend",
+      "img": "diagram.png",
+      "githubRepo": "bezerraluiz/hbl-ofertas-backend"
+    }
+  ]
+}
