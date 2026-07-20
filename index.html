@@ -27,6 +27,15 @@ a{color:inherit;text-decoration:none;cursor:none}a:hover{color:#000}
 .card:hover .card-img{transform:scale(1.06)}
 .hover-link{transition:transform .25s ease}
 .hover-link:hover{transform:scale(1.06)}
+
+#mobileSite{display:none}
+@media (max-width:700px){
+  #desktopSite,#cursorDot,#cursorRing,#floatPrev,#scrollBar,#preloader{display:none!important}
+  #mobileSite{display:block}
+  nav{padding:18px 20px!important}
+  nav>div{gap:16px!important}
+  nav a,nav span{font-size:11px!important}
+}
 </style>
 </head>
 <body>
@@ -58,6 +67,8 @@ a{color:inherit;text-decoration:none;cursor:none}a:hover{color:#000}
     <span id="langToggle" data-hover style="color:#17151c;cursor:pointer">PT/EN</span>
   </div>
 </nav>
+
+<div id="desktopSite">
 
 <!-- HERO -->
 <section id="top" style="min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:120px 44px 48px;box-sizing:border-box;position:relative;overflow:hidden">
@@ -189,9 +200,257 @@ a{color:inherit;text-decoration:none;cursor:none}a:hover{color:#000}
   <div style="height:5px;position:absolute;bottom:0;left:0;right:0;background:linear-gradient(90deg,oklch(0.62 0.17 25),oklch(0.62 0.17 85),oklch(0.62 0.17 145),oklch(0.62 0.17 205),oklch(0.62 0.17 265),oklch(0.62 0.17 325))"></div>
 </section>
 
+</div>
+
+<!-- ==================== MOBILE SITE (static, no animations) ==================== -->
+<div id="mobileSite">
+
+  <!-- HERO -->
+  <section style="min-height:100vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:32px;padding:100px 24px 56px;background:#17151c;color:#f6f4ef">
+    <div style="display:flex;justify-content:space-between;align-items:center;font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:rgba(246,244,239,.6)">
+      <span data-i18n="card.title">ENGENHEIRO DE SOFTWARE</span>
+      <span style="color:oklch(0.75 0.17 145)" data-i18n="card.status">● disponível</span>
+    </div>
+    <div>
+      <h1 style="margin:0 0 14px;font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:11vw;line-height:1.05;letter-spacing:-.02em">Luiz Antônio<br>PC Bezerra</h1>
+      <p style="margin:0;font:400 16px/1.6 system-ui,sans-serif;color:rgba(246,244,239,.75)" data-i18n="card.tagline">Crio sites e sistemas que ajudam o seu negócio a vender mais e trabalhar melhor.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;font:400 14px/1.5 system-ui,sans-serif;color:rgba(246,244,239,.8)">
+      <span data-i18n="card.back.item1"><strong>Entendendo problemas</strong>, desenvolvendo soluções.</span>
+      <span data-i18n="card.back.item2"><strong>Sistemas sob medida</strong> que organizam sua operação.</span>
+      <span data-i18n="card.back.item3"><strong>Automações</strong> que economizam horas de trabalho manual.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;font:500 13px 'JetBrains Mono',monospace;color:rgba(246,244,239,.55);padding-top:16px;border-top:1px solid rgba(246,244,239,.15)">
+      <span>luizantoniopcb@gmail.com</span>
+      <span>criciúma, sc</span>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobreM" style="padding:56px 24px;display:flex;flex-direction:column;gap:22px">
+    <img src="uploads/photo-1784041343379.jpeg" alt="Luiz Antônio" style="width:100%;height:280px;object-fit:cover;border-radius:12px;display:block">
+    <div>
+      <p style="font:500 12px 'JetBrains Mono',monospace;color:oklch(0.55 0.16 150);letter-spacing:.12em;margin:0 0 14px" data-i18n="sobre.label">01 — SOBRE MIM</p>
+      <h2 style="margin:0 0 16px;font-weight:900;font-size:7.5vw;line-height:1.2;letter-spacing:-.02em" data-i18n="sobre.headlineMobile">Sempre olho para o problema, pensando na ideia que irá <em style="font-style:normal;color:oklch(0.55 0.15 265)">resolvê-lo</em>.</h2>
+      <p style="margin:0 0 12px;font:400 15px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.7)" data-i18n="sobre.p1">Com mais de 3 anos transformando ideias em produtos digitais. Já ajudei e-commerces, ONGs e pequenos negócios a terem presença online com sistemas simples de usar e fáceis de manter.</p>
+      <p style="margin:0;font:400 15px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.7)" data-i18n="sobre.p2">Para a sua empresa, isso significa mais tempo focada no que importa, enquanto a tecnologia funciona nos bastidores.</p>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section style="padding:56px 24px;background:#efece4">
+    <p id="projLabelM" style="font:500 12px 'JetBrains Mono',monospace;color:oklch(0.55 0.16 265);letter-spacing:.12em;margin:0 0 22px">02 — PROJETOS</p>
+    <div id="projListMobile" style="display:flex;flex-direction:column;gap:20px"></div>
+  </section>
+
+  <!-- HACKATHON -->
+  <section style="padding:56px 24px;display:flex;flex-direction:column;gap:18px">
+    <img src="uploads/pasted-1784050253780-0.png" alt="Premiação do Hackathon Code4Cancer no XXVI Congresso SBOC 2025" style="width:100%;height:220px;object-fit:cover;border-radius:12px;display:block">
+    <p style="font:500 12px 'JetBrains Mono',monospace;color:rgba(23,21,28,.5);letter-spacing:.12em;margin:0" data-i18n="hackathon.label">03 — HACKATHON · 1º SBOC · 2025</p>
+    <h2 style="margin:0;font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:8vw;line-height:1.15;letter-spacing:-.02em" data-i18n="hackathon.place">3º lugar no</h2>
+    <h2 style="margin:0;font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:8vw;line-height:1.15;letter-spacing:-.02em;color:oklch(0.55 0.17 265)" data-i18n="hackathon.event">Code4Cancer</h2>
+    <p style="margin:0;font:400 15px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.7)" data-i18n="hackathon.p1">48h ininterruptas de desenvolvimento no XXVI Congresso Brasileiro de Oncologia Clínica — mais de 200 participantes em 30 equipes. Chegamos à final entre as 5 mais votadas e apresentamos o pitch no palco do Congresso.</p>
+    <p style="margin:0;font:400 15px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.7)" data-i18n="hackathon.p2">Nossa solução, o <strong>Me Cuidar</strong>, integra agendamento de consultas e exames no SUS, com lembretes personalizados e rastreamento baseado no histórico do paciente.</p>
+    <a href="https://sboc.org.br/noticias/3833-conheca-os-vencedores-do-1-hackathon-sboc/" target="_blank" style="align-self:flex-start;font:700 13px 'JetBrains Mono',monospace;color:#17151c;border-bottom:2px solid #17151c;padding-bottom:2px" data-i18n="hackathon.cta">notícia oficial ↗</a>
+  </section>
+
+  <!-- CONTATO -->
+  <section style="padding:56px 24px 40px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px;background:#17151c;color:#f6f4ef">
+    <p style="font:500 12px 'JetBrains Mono',monospace;color:rgba(246,244,239,.6);letter-spacing:.12em;margin:0" data-i18n="contato.label">04 — TEM UM PROJETO EM MENTE?</p>
+    <a href="mailto:luizantoniopcb@gmail.com" style="font-weight:900;font-family:'Archivo Expanded',sans-serif;font-size:7.5vw;word-break:break-all;color:#f6f4ef;letter-spacing:-.02em">luizantoniopcb@gmail.com</a>
+    <div style="display:flex;gap:24px;font:500 13px 'JetBrains Mono',monospace;color:rgba(246,244,239,.75)">
+      <a href="https://github.com/luizantoniopcbezerra" target="_blank" data-i18n="contato.github">github ↗</a>
+      <a href="https://www.linkedin.com/" target="_blank" data-i18n="contato.linkedin">linkedin ↗</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;font:400 12px 'JetBrains Mono',monospace;color:rgba(246,244,239,.4);margin-top:16px">
+      <span data-i18n="footer.copyright">© 2026 luiz antônio pc bezerra</span>
+      <span class="js-clock"></span>
+      <span data-i18n="footer.location">criciúma, sc — brasil</span>
+    </div>
+  </section>
+
+</div>
+
 <script>
 (function() {
   'use strict';
+
+  // MOBILE = static, no-animation experience (#mobileSite). Desktop keeps every existing effect untouched.
+  var MOBILE = window.matchMedia('(max-width:700px)').matches;
+
+  // --- Shared: language data + toggle (drives both #desktopSite and #mobileSite via data-i18n) ---
+  var currentLang = 'pt';
+  var langToggle = document.getElementById('langToggle');
+
+  var translations = {
+
+    'nav.sobre': { pt: 'sobre', en: 'about' },
+    'nav.projetos': { pt: 'projetos', en: 'projects' },
+    'nav.hackathons': { pt: 'hackathons', en: 'hackathons' },
+    'nav.contato': { pt: 'contato', en: 'contact' },
+    'card.title': { pt: 'ENGENHEIRO DE SOFTWARE', en: 'SOFTWARE ENGINEER' },
+    'card.status': { pt: '● disponível', en: '● available' },
+    'card.tagline': { pt: 'Crio sites e sistemas que ajudam o seu negócio a vender mais e trabalhar melhor.', en: 'I build websites and systems that help your business sell more and work better.' },
+    'card.back.title': { pt: 'COMO POSSO AJUDAR', en: 'HOW I CAN HELP' },
+    'card.back.item1': { pt: 'Entendendo problemas, desenvolvendo soluções.', en: 'Understanding problems, developing solutions.' },
+    'card.back.item2': { pt: 'Sistemas sob medida que organizam sua operação.', en: 'Custom systems that organize your operation.' },
+    'card.back.item3': { pt: 'Automações que economizam horas de trabalho manual.', en: 'Automations that save hours of manual work.' },
+    'card.back.flip': { pt: 'vire o cartão ↻', en: 'flip the card ↻' },
+    'hero.hint': { pt: 'passe o mouse no cartão · clique para virar', en: 'hover the card · click to flip' },
+    'sobre.label': { pt: '01 — SOBRE MIM', en: '01 — ABOUT ME' },
+    'sobre.headline': { pt: 'Sempre olho para o problema, pensando na ideia que irá <em style="font-style:normal;background:linear-gradient(90deg,oklch(0.62 0.17 85),oklch(0.6 0.15 205),oklch(0.62 0.17 325));background-size:300% 100%;animation:gradmove 4s ease infinite;-webkit-background-clip:text;background-clip:text;color:transparent">resolvê-lo</em>.', en: 'I always look at the problem, thinking of the idea that will <em style="font-style:normal;background:linear-gradient(90deg,oklch(0.62 0.17 85),oklch(0.6 0.15 205),oklch(0.62 0.17 325));background-size:300% 100%;animation:gradmove 4s ease infinite;-webkit-background-clip:text;background-clip:text;color:transparent">solve it</em>.' },
+    'sobre.headlineMobile': { pt: 'Sempre olho para o problema, pensando na ideia que irá <em style="font-style:normal;color:oklch(0.55 0.15 265)">resolvê-lo</em>.', en: 'I always look at the problem, thinking of the idea that will <em style="font-style:normal;color:oklch(0.55 0.15 265)">solve it</em>.' },
+    'sobre.p1': { pt: 'Com mais de 3 anos transformando ideias em produtos digitais. Já ajudei e-commerces, ONGs e pequenos negócios a terem presença online com sistemas simples de usar e fáceis de manter.', en: 'Over 3 years turning ideas into digital products. I have helped e-commerces, NGOs, and small businesses build an online presence with simple, maintainable systems.' },
+    'sobre.p2': { pt: 'Para a sua empresa, isso significa mais tempo focada no que importa, enquanto a tecnologia funciona nos bastidores.', en: 'For your business, that means more time focused on what matters, while technology works behind the scenes.' },
+    'projetos.label': { pt: '02 — PROJETOS', en: '02 — PROJECTS' },
+    'projetos.hint': { pt: 'role para navegar →', en: 'scroll to browse →' },
+    'projetos.cta': { pt: 'ver projeto', en: 'view project' },
+    'projetos.loading': { pt: 'carregando projetos…', en: 'loading projects…' },
+    'projetos.error': { pt: 'não foi possível carregar os projetos.', en: 'could not load projects.' },
+    'hackathon.label': { pt: '03 — HACKATHON · 1º SBOC · 2025', en: '03 — HACKATHON · 1st SBOC · 2025' },
+    'hackathon.place': { pt: '3º lugar no', en: '3rd place at' },
+    'hackathon.event': { pt: 'Code4Cancer', en: 'Code4Cancer' },
+    'hackathon.p1': { pt: '48h ininterruptas de desenvolvimento no XXVI Congresso Brasileiro de Oncologia Clínica — mais de 200 participantes em 30 equipes. Chegamos à final entre as 5 mais votadas e apresentamos o pitch no palco do Congresso.', en: '48 straight hours of development at the XXVI Brazilian Congress of Clinical Oncology — over 200 participants in 30 teams. We made the finals among the top 5 and pitched on the Congress stage.' },
+    'hackathon.p2': { pt: 'Nossa solução, o <strong>Me Cuidar</strong>, integra agendamento de consultas e exames no SUS, com lembretes personalizados e rastreamento baseado no histórico do paciente.', en: 'Our solution, <strong>Me Cuidar</strong>, integrates appointment and exam scheduling in the public health system, with personalized reminders and patient history tracking.' },
+    'hackathon.cta': { pt: 'notícia oficial ↗', en: 'official news ↗' },
+    'contato.label': { pt: '04 — TEM UM PROJETO EM MENTE?', en: '04 — HAVE A PROJECT IN MIND?' },
+    'contato.github': { pt: 'github ↗', en: 'github ↗' },
+    'contato.linkedin': { pt: 'linkedin ↗', en: 'linkedin ↗' },
+    'footer.copyright': { pt: '© 2026 luiz antônio pc bezerra', en: '© 2026 luiz antônio pc bezerra' },
+    'footer.location': { pt: 'criciúma, sc — brasil', en: 'criciúma, sc — brazil' }
+  };
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      if (translations[key] && translations[key][lang]) {
+        var html = el.innerHTML;
+        var hasHTML = html !== el.textContent;
+        if (hasHTML) {
+          el.innerHTML = translations[key][lang];
+        } else {
+          el.textContent = translations[key][lang];
+        }
+      }
+    });
+    currentLang = lang;
+    langToggle.textContent = lang === 'pt' ? 'PT/EN' : 'EN/PT';
+    renderProjects();
+  }
+
+  if (langToggle) {
+    langToggle.addEventListener('click', function() {
+      applyLang(currentLang === 'pt' ? 'en' : 'pt');
+    });
+  }
+
+  // --- Shared: clock (footer, both trees via .js-clock) ---
+  (function() {
+    function updateClock() {
+      var text = new Date().toLocaleTimeString('pt-BR') + ' BRT';
+      document.querySelectorAll('.js-clock').forEach(function(el) { el.textContent = text; });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  })();
+
+  // --- Shared: dynamic projects (from GitHub pinned repos, see scripts/fetch-pinned.mjs) ---
+  var projectsData = [];
+  var PROJECT_HUES = [25, 85, 145, 205, 265, 325];
+  var rebindProjectRows; // set by bindInteractions() on desktop only
+
+  function escHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function renderProjectsDesktop() {
+    var label = document.getElementById('projLabel');
+    if (label) {
+      var prefix = translations['projetos.label'][currentLang] || translations['projetos.label'].pt;
+      label.textContent = prefix + ' (' + projectsData.length + ')';
+    }
+    var track = document.getElementById('projTrack');
+    if (!track) return;
+    var cta = translations['projetos.cta'][currentLang];
+    track.innerHTML = projectsData.map(function(p, i) {
+      var num = String(i + 1).padStart(2, '0');
+      var hue = PROJECT_HUES[i % PROJECT_HUES.length];
+      var title = (p.title && (p.title[currentLang] || p.title.pt)) || '';
+      var desc = (p.desc && (p.desc[currentLang] || p.desc.pt)) || '';
+      var tags = (p.tags && (p.tags[currentLang] || p.tags.pt)) || '';
+      var img = p.img || '';
+      return '<a href="' + escHtml(p.url) + '" target="_blank" data-row data-img="' + escHtml(img) + '" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">' +
+          '<div style="overflow:hidden;height:250px;background:#eceae4">' +
+            '<div class="card-img" style="width:100%;height:100%;background-image:url(\'' + escHtml(img) + '\');background-size:cover;background-position:top center"></div>' +
+          '</div>' +
+          '<div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">' +
+            '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">' +
+              '<span style="font:700 13px \'JetBrains Mono\',monospace;color:oklch(0.62 0.16 ' + hue + ')">' + num + '</span>' +
+              '<span style="font:400 11px \'JetBrains Mono\',monospace;color:rgba(23,21,28,.45);text-align:right">' + escHtml(tags) + '</span>' +
+            '</div>' +
+            '<div style="font-weight:900;font-family:\'Archivo Expanded\',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08">' + escHtml(title) + '</div>' +
+            '<p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)">' + escHtml(desc) + '</p>' +
+            '<span style="margin-top:auto;font:700 12px \'JetBrains Mono\',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span>' + escHtml(cta) + '</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>' +
+          '</div>' +
+        '</a>';
+    }).join('');
+    if (rebindProjectRows) rebindProjectRows();
+  }
+
+  function renderProjectsMobile() {
+    var label = document.getElementById('projLabelM');
+    if (label) {
+      var prefix = translations['projetos.label'][currentLang] || translations['projetos.label'].pt;
+      label.textContent = prefix + ' (' + projectsData.length + ')';
+    }
+    var list = document.getElementById('projListMobile');
+    if (!list) return;
+    var cta = translations['projetos.cta'][currentLang];
+    list.innerHTML = projectsData.map(function(p, i) {
+      var num = String(i + 1).padStart(2, '0');
+      var hue = PROJECT_HUES[i % PROJECT_HUES.length];
+      var title = (p.title && (p.title[currentLang] || p.title.pt)) || '';
+      var desc = (p.desc && (p.desc[currentLang] || p.desc.pt)) || '';
+      var tags = (p.tags && (p.tags[currentLang] || p.tags.pt)) || '';
+      var img = p.img || '';
+      return '<a href="' + escHtml(p.url) + '" target="_blank" style="display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">' +
+          (img ? '<div style="height:170px;background:#eceae4"><img src="' + escHtml(img) + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>' : '') +
+          '<div style="display:flex;flex-direction:column;gap:8px;padding:18px 18px 20px">' +
+            '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">' +
+              '<span style="font:700 13px \'JetBrains Mono\',monospace;color:oklch(0.55 0.16 ' + hue + ')">' + num + '</span>' +
+              '<span style="font:400 11px \'JetBrains Mono\',monospace;color:rgba(23,21,28,.45);text-align:right">' + escHtml(tags) + '</span>' +
+            '</div>' +
+            '<div style="font-weight:900;font-family:\'Archivo Expanded\',sans-serif;font-size:19px;letter-spacing:-.02em;line-height:1.2">' + escHtml(title) + '</div>' +
+            '<p style="margin:0;font:400 14px/1.55 system-ui,sans-serif;color:rgba(23,21,28,.65)">' + escHtml(desc) + '</p>' +
+            '<span style="font:700 12px \'JetBrains Mono\',monospace;color:#17151c;padding-top:4px">' + escHtml(cta) + ' →</span>' +
+          '</div>' +
+        '</a>';
+    }).join('');
+  }
+
+  var renderProjects = MOBILE ? renderProjectsMobile : renderProjectsDesktop;
+
+  function loadProjects() {
+    fetch('projects.json')
+      .then(function(res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function(data) {
+        projectsData = (data && data.projects) || [];
+        renderProjects();
+      })
+      .catch(function(err) {
+        console.error('Failed to load projects.json:', err);
+      });
+  }
+  loadProjects();
+
+  if (MOBILE) return; // mobile is fully static from here on — no cursor, parallax, scroll-jack, card flip, or preloader wait
+
+  // ================= DESKTOP-ONLY EXPERIENCE BELOW =================
 
   // --- Preloader ---
   let doneLoading = false;
@@ -313,7 +572,6 @@ a{color:inherit;text-decoration:none;cursor:none}a:hover{color:#000}
   var cardReady = false;
   var _projX, _projTargetX;
   var emailObserver;
-  var rebindProjectRows;
 
   function bindInteractions() {
     // Custom cursor
@@ -537,142 +795,6 @@ a{color:inherit;text-decoration:none;cursor:none}a:hover{color:#000}
       mag.addEventListener('mouseleave', function() { mag.style.transform = 'translateY(0)'; });
     }
   }
-
-  // --- Clock ---
-  var clock = document.getElementById('clock');
-  if (clock) {
-    function updateClock() {
-      clock.textContent = new Date().toLocaleTimeString('pt-BR') + ' BRT';
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-  }
-
-  // --- PT/EN Toggle ---
-  var currentLang = 'pt';
-  var langToggle = document.getElementById('langToggle');
-  var projectsData = [];
-
-  var translations = {
-
-    'nav.sobre': { pt: 'sobre', en: 'about' },
-    'nav.projetos': { pt: 'projetos', en: 'projects' },
-    'nav.hackathons': { pt: 'hackathons', en: 'hackathons' },
-    'nav.contato': { pt: 'contato', en: 'contact' },
-    'card.title': { pt: 'ENGENHEIRO DE SOFTWARE', en: 'SOFTWARE ENGINEER' },
-    'card.status': { pt: '● disponível', en: '● available' },
-    'card.tagline': { pt: 'Crio sites e sistemas que ajudam o seu negócio a vender mais e trabalhar melhor.', en: 'I build websites and systems that help your business sell more and work better.' },
-    'card.back.title': { pt: 'COMO POSSO AJUDAR', en: 'HOW I CAN HELP' },
-    'card.back.item1': { pt: 'Entendendo problemas, desenvolvendo soluções.', en: 'Understanding problems, developing solutions.' },
-    'card.back.item2': { pt: 'Sistemas sob medida que organizam sua operação.', en: 'Custom systems that organize your operation.' },
-    'card.back.item3': { pt: 'Automações que economizam horas de trabalho manual.', en: 'Automations that save hours of manual work.' },
-    'card.back.flip': { pt: 'vire o cartão ↻', en: 'flip the card ↻' },
-    'hero.hint': { pt: 'passe o mouse no cartão · clique para virar', en: 'hover the card · click to flip' },
-    'sobre.label': { pt: '01 — SOBRE MIM', en: '01 — ABOUT ME' },
-    'sobre.headline': { pt: 'Sempre olho para o problema, pensando na ideia que irá <em style="font-style:normal;background:linear-gradient(90deg,oklch(0.62 0.17 85),oklch(0.6 0.15 205),oklch(0.62 0.17 325));background-size:300% 100%;animation:gradmove 4s ease infinite;-webkit-background-clip:text;background-clip:text;color:transparent">resolvê-lo</em>.', en: 'I always look at the problem, thinking of the idea that will <em style="font-style:normal;background:linear-gradient(90deg,oklch(0.62 0.17 85),oklch(0.6 0.15 205),oklch(0.62 0.17 325));background-size:300% 100%;animation:gradmove 4s ease infinite;-webkit-background-clip:text;background-clip:text;color:transparent">solve it</em>.' },
-    'sobre.p1': { pt: 'Com mais de 3 anos transformando ideias em produtos digitais. Já ajudei e-commerces, ONGs e pequenos negócios a terem presença online com sistemas simples de usar e fáceis de manter.', en: 'Over 3 years turning ideas into digital products. I have helped e-commerces, NGOs, and small businesses build an online presence with simple, maintainable systems.' },
-    'sobre.p2': { pt: 'Para a sua empresa, isso significa mais tempo focada no que importa, enquanto a tecnologia funciona nos bastidores.', en: 'For your business, that means more time focused on what matters, while technology works behind the scenes.' },
-    'projetos.label': { pt: '02 — PROJETOS', en: '02 — PROJECTS' },
-    'projetos.hint': { pt: 'role para navegar →', en: 'scroll to browse →' },
-    'projetos.cta': { pt: 'ver projeto', en: 'view project' },
-    'projetos.loading': { pt: 'carregando projetos…', en: 'loading projects…' },
-    'projetos.error': { pt: 'não foi possível carregar os projetos.', en: 'could not load projects.' },
-    'hackathon.label': { pt: '03 — HACKATHON · 1º SBOC · 2025', en: '03 — HACKATHON · 1st SBOC · 2025' },
-    'hackathon.place': { pt: '3º lugar no', en: '3rd place at' },
-    'hackathon.event': { pt: 'Code4Cancer', en: 'Code4Cancer' },
-    'hackathon.p1': { pt: '48h ininterruptas de desenvolvimento no XXVI Congresso Brasileiro de Oncologia Clínica — mais de 200 participantes em 30 equipes. Chegamos à final entre as 5 mais votadas e apresentamos o pitch no palco do Congresso.', en: '48 straight hours of development at the XXVI Brazilian Congress of Clinical Oncology — over 200 participants in 30 teams. We made the finals among the top 5 and pitched on the Congress stage.' },
-    'hackathon.p2': { pt: 'Nossa solução, o <strong>Me Cuidar</strong>, integra agendamento de consultas e exames no SUS, com lembretes personalizados e rastreamento baseado no histórico do paciente.', en: 'Our solution, <strong>Me Cuidar</strong>, integrates appointment and exam scheduling in the public health system, with personalized reminders and patient history tracking.' },
-    'hackathon.cta': { pt: 'notícia oficial ↗', en: 'official news ↗' },
-    'contato.label': { pt: '04 — TEM UM PROJETO EM MENTE?', en: '04 — HAVE A PROJECT IN MIND?' },
-    'contato.github': { pt: 'github ↗', en: 'github ↗' },
-    'contato.linkedin': { pt: 'linkedin ↗', en: 'linkedin ↗' },
-    'footer.copyright': { pt: '© 2026 luiz antônio pc bezerra', en: '© 2026 luiz antônio pc bezerra' },
-    'footer.location': { pt: 'criciúma, sc — brasil', en: 'criciúma, sc — brazil' }
-  };
-
-  function applyLang(lang) {
-    document.querySelectorAll('[data-i18n]').forEach(function(el) {
-      var key = el.getAttribute('data-i18n');
-      if (translations[key] && translations[key][lang]) {
-        var html = el.innerHTML;
-        var hasHTML = html !== el.textContent;
-        if (hasHTML) {
-          el.innerHTML = translations[key][lang];
-        } else {
-          el.textContent = translations[key][lang];
-        }
-      }
-    });
-    currentLang = lang;
-    langToggle.textContent = lang === 'pt' ? 'PT/EN' : 'EN/PT';
-    renderProjects();
-  }
-
-  if (langToggle) {
-    langToggle.addEventListener('click', function() {
-      applyLang(currentLang === 'pt' ? 'en' : 'pt');
-    });
-  }
-
-  // --- Dynamic projects (from GitHub pinned repos, see scripts/fetch-pinned.mjs) ---
-  var PROJECT_HUES = [25, 85, 145, 205, 265, 325];
-
-  function escHtml(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-
-  function renderProjects() {
-    var label = document.getElementById('projLabel');
-    if (label) {
-      var prefix = translations['projetos.label'][currentLang] || translations['projetos.label'].pt;
-      label.textContent = prefix + ' (' + projectsData.length + ')';
-    }
-    var track = document.getElementById('projTrack');
-    if (!track) return;
-    var cta = translations['projetos.cta'][currentLang];
-    track.innerHTML = projectsData.map(function(p, i) {
-      var num = String(i + 1).padStart(2, '0');
-      var hue = PROJECT_HUES[i % PROJECT_HUES.length];
-      var title = (p.title && (p.title[currentLang] || p.title.pt)) || '';
-      var desc = (p.desc && (p.desc[currentLang] || p.desc.pt)) || '';
-      var tags = (p.tags && (p.tags[currentLang] || p.tags.pt)) || '';
-      var img = p.img || '';
-      return '<a href="' + escHtml(p.url) + '" target="_blank" data-row data-img="' + escHtml(img) + '" class="card" style="flex:none;width:460px;display:flex;flex-direction:column;background:#fff;border:1px solid rgba(23,21,28,.1);border-radius:12px;overflow:hidden">' +
-          '<div style="overflow:hidden;height:250px;background:#eceae4">' +
-            '<div class="card-img" style="width:100%;height:100%;background-image:url(\'' + escHtml(img) + '\');background-size:cover;background-position:top center"></div>' +
-          '</div>' +
-          '<div style="display:flex;flex-direction:column;gap:10px;padding:24px 26px 26px;flex:1">' +
-            '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">' +
-              '<span style="font:700 13px \'JetBrains Mono\',monospace;color:oklch(0.62 0.16 ' + hue + ')">' + num + '</span>' +
-              '<span style="font:400 11px \'JetBrains Mono\',monospace;color:rgba(23,21,28,.45);text-align:right">' + escHtml(tags) + '</span>' +
-            '</div>' +
-            '<div style="font-weight:900;font-family:\'Archivo Expanded\',sans-serif;font-size:24px;letter-spacing:-.025em;line-height:1.08">' + escHtml(title) + '</div>' +
-            '<p style="margin:0;font:400 13.5px/1.6 system-ui,sans-serif;color:rgba(23,21,28,.6)">' + escHtml(desc) + '</p>' +
-            '<span style="margin-top:auto;font:700 12px \'JetBrains Mono\',monospace;color:#17151c;padding-top:6px;display:inline-flex;gap:6px;align-items:center"><span>' + escHtml(cta) + '</span> <span style="display:inline-block;animation:nudge 1.6s ease-in-out infinite">→</span></span>' +
-          '</div>' +
-        '</a>';
-    }).join('');
-    if (rebindProjectRows) rebindProjectRows();
-  }
-
-  function loadProjects() {
-    fetch('projects.json')
-      .then(function(res) {
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        return res.json();
-      })
-      .then(function(data) {
-        projectsData = (data && data.projects) || [];
-        renderProjects();
-      })
-      .catch(function(err) {
-        console.error('Failed to load projects.json:', err);
-      });
-  }
-
-  loadProjects();
 
 })();
 </script>
